@@ -4,6 +4,7 @@ package com.lyy.exception.handler;
 import com.lyy.common.CommonResponse;
 import com.lyy.common.ResponseHead;
 import com.lyy.exception.ErrorCode;
+import com.lyy.exception.base.AppException;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.exception.base.DaoException;
 import com.lyy.exception.base.ServiceException;
@@ -22,7 +23,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionResolver {
-
+    /**
+     * 处理业务异常
+     * 服务端发生异常则统一异常处理,捕获BussinessException异常,将异常错误码填写在应答码，将错误信息填写在消息字段
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(AppException.class)
+    @ResponseBody
+    public CommonResponse<Object> handlerAppException(AppException e){
+        log.error("App异常：错误码[{}], 错误信息[{}]", e.getCode(), e.getMessage());
+        log.error("错误详情：", e);
+        return new CommonResponse<Object>(new ResponseHead(e.getCode(), e.getMessage()), new com.lyy.common.ResponseBody<Object>());
+    }
 
     /**
      * 处理业务异常

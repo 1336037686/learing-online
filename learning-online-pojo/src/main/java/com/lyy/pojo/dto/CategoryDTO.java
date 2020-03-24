@@ -1,22 +1,17 @@
-package com.lyy.pojo.entity;
+package com.lyy.pojo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
- * (Category)实体类
- *
- * @author makejava
- * @since 2020-03-23 21:02:06
+ * @author LGX_TvT
+ * @date 2020-03-24 17:23
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Category implements Serializable {
-    private static final long serialVersionUID = -71892834555720879L;
+@NoArgsConstructor
+public class CategoryDTO {
 
     /**
      * 类别ID
@@ -32,5 +27,6 @@ public class Category implements Serializable {
      * 状态
      */
     private String state;
+
 
 }

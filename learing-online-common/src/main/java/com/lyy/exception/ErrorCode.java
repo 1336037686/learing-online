@@ -80,6 +80,30 @@ public final class ErrorCode {
     public static final String SYSTEM_EXCEPTION_ERROR = "100999";
 
 
+    // ################# 服务 错误码 #################
+
+    // ################# 类别管理模块 #################
+    /**
+     * 类别保存错误
+     */
+    public static final String SERVICE_CATEGORY_SAVE_FAIL_ERROR = "210001";
+
+    /**
+     * 类别删除错误
+     */
+    public static final String SERVICE_CATEGORY_DELETE_FAIL_ERROR = "210002";
+
+    /**
+     * 类别更新错误
+     */
+    public static final String SERVICE_CATEGORY_UPDATE_FAIL_ERROR = "210003";
+
+    /**
+     * 类别查询错误
+     */
+    public static final String SERVICE_CATEGORY_QUERY_FAIL_ERROR = "210004";
+
+
 
 
 }
