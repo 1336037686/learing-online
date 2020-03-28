@@ -27,4 +27,6 @@ public class AdminAnnouncement implements Serializable {
     
     private Date time;
 
+    private String state;
+
 }

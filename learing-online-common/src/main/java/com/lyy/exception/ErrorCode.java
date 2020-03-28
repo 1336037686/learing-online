@@ -103,7 +103,25 @@ public final class ErrorCode {
      */
     public static final String SERVICE_CATEGORY_QUERY_FAIL_ERROR = "210004";
 
+    // ################# 管理员公告管理模块 #################
+    /**
+     * 公告保存错误
+     */
+    public static final String SERVICE_ADMIN_ANNOUNCEMENT_SAVE_FAIL_ERROR = "211001";
 
+    /**
+     * 公告删除错误
+     */
+    public static final String SERVICE_ADMIN_ANNOUNCEMENT_DELETE_FAIL_ERROR = "211002";
 
+    /**
+     * 公告更新错误
+     */
+    public static final String SERVICE_ADMIN_ANNOUNCEMENT_UPDATE_FAIL_ERROR = "211003";
+
+    /**
+     * 公告查询错误
+     */
+    public static final String SERVICE_ADMIN_ANNOUNCEMENT_QUERY_FAIL_ERROR = "211004";
 
 }

@@ -22,7 +22,7 @@ import java.util.List;
  * @author LGX_TvT
  * @date 2020-03-23 22:01
  */
-@Api(tags = "课程类别管理Api")
+@Api(tags = "课程类别管理Api (V1版本)")
 @RequestMapping("/v1/category")
 @RestController
 public class CategoryController {
@@ -59,7 +59,7 @@ public class CategoryController {
     @ApiOperation(value = "查询所有类别信息", notes = "无参数")
     @ApiILog
     @GetMapping("/query")
-    public CommonResponse<List<CategoryResponseVO>> doQueryAll() {
+    public CommonResponse<List<CategoryResponseVO>> doQueryAll() throws AppException{
         List<CategoryResponseVO> list = null;
         try {
             List<CategoryDTO> dtoList = categoryService.queryAll();
@@ -78,7 +78,7 @@ public class CategoryController {
     @ApiOperation(value = "按照id查询所有类别信息", notes = "id(必填)")
     @ApiILog
     @GetMapping("/query/{id}")
-    public CommonResponse<CategoryResponseVO> doQueryById(@PathVariable("id") String id) {
+    public CommonResponse<CategoryResponseVO> doQueryById(@PathVariable("id") String id) throws AppException{
         CategoryResponseVO vo = null;
         try {
             CategoryDTO dto = categoryService.queryById(id);

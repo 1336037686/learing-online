@@ -1,7 +1,5 @@
 package com.lyy.common;
 
-import com.lyy.exception.ErrorCode;
-
 /**
  * 状态码
  * @author LGX_TvT
@@ -17,11 +15,5 @@ public final class StateCode {
      * 失败
      */
     public static final String FAIL_CODE = "400";
-
-    /**
-     * 错误码
-     */
-    public static ErrorCode Error_Code;
-
 
 }

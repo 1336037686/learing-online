@@ -43,6 +43,11 @@
         <!--引用子工程-->
         <dependency>
             <groupId>com.lyy</groupId>
+            <artifactId>learing-online-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lyy</groupId>
             <artifactId>learning-online-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

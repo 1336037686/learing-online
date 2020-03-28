@@ -22,11 +22,6 @@
         <!--引用子工程-->
         <dependency>
             <groupId>com.lyy</groupId>
-            <artifactId>learing-online-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.lyy</groupId>
             <artifactId>learing-online-dao</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
