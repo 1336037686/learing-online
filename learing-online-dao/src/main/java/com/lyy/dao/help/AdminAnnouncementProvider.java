@@ -21,6 +21,7 @@ public class AdminAnnouncementProvider {
         if (!dto.getSelectContent().trim().equals("")){
             sql.append(" and title like '%" + dto.getSelectContent() + "%'");
         }
+        sql.append("  ORDER BY TIME DESC");
         return sql.toString();
     }
 

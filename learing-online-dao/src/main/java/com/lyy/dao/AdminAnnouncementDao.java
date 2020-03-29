@@ -27,7 +27,7 @@ public interface AdminAnnouncementDao {
      * 查询所有管理员公告
      * @return
      */
-    @Select("select * from admin_announcement where state = 0")
+    @Select("select * from admin_announcement where state = 0 ORDER BY TIME DESC")
     List<AdminAnnouncement> queryAll();
 
     /**

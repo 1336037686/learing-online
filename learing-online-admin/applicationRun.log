@@ -68,3 +68,17 @@
 2020-03-29 02:26:30.394  INFO 14156 --- [main] c.l.LearingOnlineAdminApplicationTests   : Started LearingOnlineAdminApplicationTests in 7.556 seconds (JVM running for 9.094)
 2020-03-29 02:26:30.898  INFO 14156 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
 2020-03-29 02:26:30.920  INFO 14156 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-03-29 13:39:16.754  INFO 17948 --- [main] c.l.LearingOnlineAdminApplicationTests   : Starting LearingOnlineAdminApplicationTests on DESKTOP-F4CCISB with PID 17948 (started by LGX in E:\DevelopProjects\Java_Project\idea_project\lyy\learing-online\learing-online-admin)
+2020-03-29 13:39:16.755  INFO 17948 --- [main] c.l.LearingOnlineAdminApplicationTests   : No active profile set, falling back to default profiles: default
+2020-03-29 13:39:19.613  INFO 17948 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-03-29 13:39:20.490  INFO 17948 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-03-29 13:39:22.494  INFO 17948 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-03-29 13:39:23.046  INFO 17948 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-03-29 13:39:23.579  INFO 17948 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-03-29 13:39:23.620  INFO 17948 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-03-29 13:39:23.667  INFO 17948 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-03-29 13:39:23.943  INFO 17948 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: doRemoveUsingDELETE_1
+2020-03-29 13:39:23.948  INFO 17948 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: doSaveUsingPOST_1
+2020-03-29 13:39:23.985  INFO 17948 --- [main] c.l.LearingOnlineAdminApplicationTests   : Started LearingOnlineAdminApplicationTests in 7.928 seconds (JVM running for 9.667)
+2020-03-29 13:39:25.168  INFO 17948 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-03-29 13:39:25.185  INFO 17948 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
