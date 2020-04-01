@@ -2,10 +2,10 @@ package com.lyy.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lyy.dao.StudentDao;
-import com.lyy.pojo.dto.StudentDTO;
-import com.lyy.pojo.entity.Student;
-import com.lyy.service.StudentService;
+import com.lyy.dao.TeacherDao;
+import com.lyy.pojo.dto.TeacherDTO;
+import com.lyy.pojo.entity.Teacher;
+import com.lyy.service.TeacherService;
 import com.lyy.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,23 +17,23 @@ import java.util.List;
  * @date 2020-03-31 22:04
  */
 @Service
-public class StudentServiceImpl implements StudentService {
+public class TeacherServiceImpl implements TeacherService {
 
     @Autowired
-    private StudentDao studentDao;
+    private TeacherDao teacherDao;
 
     @Autowired
     private ConverterUtil converterUtil;
 
     /**
      * 保存
-     * @param studentDTO
+     * @param teacherDTO
      * @return
      */
     @Override
-    public boolean save(StudentDTO studentDTO) {
-        Student student = converterUtil.copyPropertiesAndReturnNewOne(studentDTO, Student.class);
-        studentDao.save(student);
+    public boolean save(TeacherDTO teacherDTO) {
+        Teacher teacher = converterUtil.copyPropertiesAndReturnNewOne(teacherDTO, Teacher.class);
+        teacherDao.save(teacher);
         return true;
     }
 
@@ -43,22 +43,22 @@ public class StudentServiceImpl implements StudentService {
      * @return
      */
     @Override
-    public StudentDTO queryAll(StudentDTO dto) {
+    public TeacherDTO queryAll(TeacherDTO dto) {
         PageHelper.startPage(dto.getCurrentPage(), dto.getSize());
-        List<Student> studentList = studentDao.queryAll();
-        PageInfo<Student> pageInfo = new PageInfo<Student>(studentList);
+        List<Teacher> teacherList = teacherDao.queryAll();
+        PageInfo<Teacher> pageInfo = new PageInfo<Teacher>(teacherList);
         dto.setPageInfo(pageInfo);
         return dto;
     }
 
     /**
      * 更新
-     * @param studentDTO
+     * @param teacherDTO
      * @return
      */
     @Override
-    public boolean update(StudentDTO studentDTO) {
-        studentDao.update(converterUtil.copyComplicatedObjectAndReturnNewOne(studentDTO, Student.class));
+    public boolean update(TeacherDTO teacherDTO) {
+        teacherDao.update(converterUtil.copyComplicatedObjectAndReturnNewOne(teacherDTO, Teacher.class));
         return true;
     }
 
@@ -69,7 +69,7 @@ public class StudentServiceImpl implements StudentService {
      */
     @Override
     public boolean remove(String id) {
-        studentDao.remove(id);
+        teacherDao.remove(id);
         return true;
     }
 }
