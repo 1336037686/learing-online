@@ -124,4 +124,90 @@ public final class ErrorCode {
      */
     public static final String SERVICE_ADMIN_ANNOUNCEMENT_QUERY_FAIL_ERROR = "211004";
 
+    // ################# 管理员院系管理模块 #################
+    /**
+     * 院系保存错误
+     */
+    public static final String SERVICE_DEPARTMENT_SAVE_FAIL_ERROR = "212001";
+
+    /**
+     * 院系删除错误
+     */
+    public static final String SERVICE_DEPARTMENT_DELETE_FAIL_ERROR = "212002";
+
+    /**
+     * 院系更新错误
+     */
+    public static final String SERVICE_DEPARTMENT_UPDATE_FAIL_ERROR = "212003";
+
+    /**
+     * 院系查询错误
+     */
+    public static final String SERVICE_DEPARTMENT_QUERY_FAIL_ERROR = "212004";
+
+    // ################# 管理员专业管理模块 #################
+    /**
+     * 专业保存错误
+     */
+    public static final String SERVICE_SPECIALTY_SAVE_FAIL_ERROR = "213001";
+
+    /**
+     * 专业删除错误
+     */
+    public static final String SERVICE_SPECIALTY_DELETE_FAIL_ERROR = "213002";
+
+    /**
+     * 专业更新错误
+     */
+    public static final String SERVICE_SPECIALTY_UPDATE_FAIL_ERROR = "213003";
+
+    /**
+     * 专业查询错误
+     */
+    public static final String SERVICE_SPECIALTY_QUERY_FAIL_ERROR = "212304";
+
+    // ################# 管理员学生管理模块 #################
+    /**
+     * 学生保存错误
+     */
+    public static final String SERVICE_STUDENT_SAVE_FAIL_ERROR = "214001";
+
+    /**
+     * 学生删除错误
+     */
+    public static final String SERVICE_STUDENT_DELETE_FAIL_ERROR = "214002";
+
+    /**
+     * 学生更新错误
+     */
+    public static final String SERVICE_STUDENT_UPDATE_FAIL_ERROR = "214003";
+
+    /**
+     * 学生查询错误
+     */
+    public static final String SERVICE_STUDENT_QUERY_FAIL_ERROR = "214004";
+
+    // ################# 管理员教师管理模块 #################
+    /**
+     * 教师保存错误
+     */
+    public static final String SERVICE_TEACHER_SAVE_FAIL_ERROR = "215001";
+
+    /**
+     * 教师删除错误
+     */
+    public static final String SERVICE_TEACHER_DELETE_FAIL_ERROR = "215002";
+
+    /**
+     * 教师更新错误
+     */
+    public static final String SERVICE_TEACHER_UPDATE_FAIL_ERROR = "215003";
+
+    /**
+     * 教师查询错误
+     */
+    public static final String SERVICE_TEACHER_QUERY_FAIL_ERROR = "215004";
+
+
+
 }

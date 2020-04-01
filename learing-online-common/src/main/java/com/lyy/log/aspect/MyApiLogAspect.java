@@ -89,7 +89,7 @@ public class MyApiLogAspect {
         logger.info("== 业务发生时间:{}", DateUtil.parseDate(serviceHappenDate, "yyyy-MM-dd hh:mm:ss"));
         logger.info("== 响应耗时:{}", endtime-startTime < 0 ? "" : ((endtime - startTime) / 1000) + "s");
         logger.info("== 返回内容:{}", o == null ? "" : o.toString());
-        logger.info("=====================  响应内容 =====================");
+        logger.info("===================================================");
         return o;
     }
 }

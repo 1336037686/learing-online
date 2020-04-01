@@ -74,8 +74,6 @@ public class AdminAnnouncementServiceImpl implements AdminAnnouncementService {
     public AdminAnnouncementConditionDTO queryByCondition(AdminAnnouncementConditionDTO dto) {
         PageHelper.startPage(dto.getCurrentPage(), dto.getSize());
         List<AdminAnnouncement> adminAnnouncements = adminAnnouncementDao.queryByCondition(dto);
-        System.out.println("=======");
-        System.out.println(adminAnnouncements);
         PageInfo<AdminAnnouncement> pageInfo = new PageInfo<>(adminAnnouncements);
         dto.setPageInfo(pageInfo);
         return dto;
