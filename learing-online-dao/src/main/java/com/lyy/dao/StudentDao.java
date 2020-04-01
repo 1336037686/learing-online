@@ -1,7 +1,5 @@
 package com.lyy.dao;
 
-import com.lyy.pojo.entity.Department;
-import com.lyy.pojo.entity.Specialty;
 import com.lyy.pojo.entity.Student;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -23,38 +21,38 @@ public interface StudentDao {
      * @param student
      * @return
      */
-    @Insert("insert into student values(#{id}, #{depId}, #{name}, #{state})")
+    @Insert("insert into student values(#{id}, #{userName}, #{name}, #{sex}, #{phone}, #{password}, #{specialty}, #{stuClass}, #{address}, #{email}, #{startTime}, #{state})")
     int save(Student student);
 
     /**
      * 查询所有专业
      * @return
      */
-    @Select("select * from specialty where state = 0")
-    List<Specialty> queryAll();
+    @Select("select * from student where state = 0")
+    List<Student> queryAll();
 
     /**
      * 按照id查找专业
      * @param id
      * @return
      */
-    @Select("select * from specialty where state = 0 and id = #{id}")
-    Department queryById(String id);
+    @Select("select * from student where state = 0 and id = #{id}")
+    Student queryById(String id);
 
     /**
      * 更新专业
-     * @param specialty
+     * @param student
      * @return
      */
-    @Update("update specialty set name = #{name}, dep_id = #{depId} where id = #{id}")
-    int update(Specialty specialty);
+    @Update("update student set name = #{name}, sex = #{sex}, phone = #{phone}, password = #{password}, specialty = #{specialty}, stu_class = #{stuClass}, address = #{address}, email = #{email}, start_time = #{startTime} where id = #{id}")
+    int update(Student student);
 
     /**
      * 删除专业
      * @param id
      * @return
      */
-    @Update("update specialty set state = 1 where id = #{id}")
+    @Update("update student set state = 1 where id = #{id}")
     int remove(String id);
 
 }

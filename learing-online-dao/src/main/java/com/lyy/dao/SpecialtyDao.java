@@ -1,6 +1,5 @@
 package com.lyy.dao;
 
-import com.lyy.pojo.entity.Department;
 import com.lyy.pojo.entity.Specialty;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -38,7 +37,7 @@ public interface SpecialtyDao {
      * @return
      */
     @Select("select * from specialty where state = 0 and id = #{id}")
-    Department queryById(String id);
+    Specialty queryById(String id);
 
     /**
      * 更新专业

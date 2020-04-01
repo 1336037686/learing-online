@@ -1,19 +1,19 @@
-package com.lyy.pojo.entity;
+package com.lyy.pojo.dto;
 
+import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 /**
- * 教师类
+ *
+ * @author LGX_TvT
+ * @date 2020-03-31 20:35
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Teacher implements Serializable {
-    private static final long serialVersionUID = 160950302497489967L;
+public class TeacherDTO {
 
     /**
      * id
@@ -64,5 +64,20 @@ public class Teacher implements Serializable {
      * 状态
      */
     private String state;
+
+    /**
+     * 数据条数
+     */
+    private Integer size;
+
+    /**
+     * 当前页
+     */
+    private Integer currentPage;
+
+    /**
+     * pageInfo
+     */
+    private PageInfo pageInfo;
 
 }

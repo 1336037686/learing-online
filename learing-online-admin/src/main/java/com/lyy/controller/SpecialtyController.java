@@ -6,7 +6,6 @@ import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.AppException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.SpecialtyDTO;
-import com.lyy.pojo.vo.AdminAnnouncementQueryVo;
 import com.lyy.pojo.vo.SpecialtyQueryVO;
 import com.lyy.pojo.vo.SpecialtyResponseVO;
 import com.lyy.service.SpecialtyService;
@@ -68,7 +67,7 @@ public class SpecialtyController {
     @ApiOperation(value = "分页查找管理员公告信息", notes = "需要页号，长度范围.")
     @ApiILog
     @PostMapping("/query")
-    public CommonResponse<SpecialtyResponseVO> doQueryAll(@org.springframework.web.bind.annotation.RequestBody CommonRequest<AdminAnnouncementQueryVo> vo) throws AppException {
+    public CommonResponse<SpecialtyResponseVO> doQueryAll(@org.springframework.web.bind.annotation.RequestBody CommonRequest<SpecialtyQueryVO> vo) throws AppException {
         SpecialtyDTO dto = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), SpecialtyDTO.class);
         SpecialtyResponseVO specialtyResponseVO = null;
         try {

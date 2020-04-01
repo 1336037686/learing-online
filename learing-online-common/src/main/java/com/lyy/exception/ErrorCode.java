@@ -208,6 +208,27 @@ public final class ErrorCode {
      */
     public static final String SERVICE_TEACHER_QUERY_FAIL_ERROR = "215004";
 
+    // ################# 课程信息管理模块 #################
+    /**
+     * 教师保存错误
+     */
+    public static final String SERVICE_COURSE_SAVE_FAIL_ERROR = "216001";
+
+    /**
+     * 教师删除错误
+     */
+    public static final String SERVICE_COURSE_DELETE_FAIL_ERROR = "216002";
+
+    /**
+     * 教师更新错误
+     */
+    public static final String SERVICE_COURSE_UPDATE_FAIL_ERROR = "216003";
+
+    /**
+     * 教师查询错误
+     */
+    public static final String SERVICE_COURSE_QUERY_FAIL_ERROR = "216004";
+
 
 
 }
