@@ -43,11 +43,11 @@ public class CourseController {
     @ApiOperation(value = "分页查找课程信息信息", notes = "需要页号，长度范围.")
     @ApiILog
     @PostMapping("/query")
-    public CommonResponse<CourseResponseVO> doQueryAll(@org.springframework.web.bind.annotation.RequestBody CommonRequest<CourseQueryVO> vo) throws AppException {
+    public CommonResponse<CourseResponseVO> doQueryAllAndNotCheck(@org.springframework.web.bind.annotation.RequestBody CommonRequest<CourseQueryVO> vo) throws AppException {
         CourseDTO dto = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), CourseDTO.class);
         CourseResponseVO courseResponseVO = null;
         try {
-            CourseDTO courseDTO = courseService.queryAll(dto);
+            CourseDTO courseDTO = courseService.queryAllAndNotCheck(dto);
             courseResponseVO = converterUtil.copyPropertiesAndReturnNewOne(courseDTO, CourseResponseVO.class);
         } catch (Exception e) {
             throw new AppException(ErrorCode.SERVICE_COURSE_QUERY_FAIL_ERROR, "课程信息查找失败");

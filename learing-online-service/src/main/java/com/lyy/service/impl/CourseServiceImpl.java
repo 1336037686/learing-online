@@ -32,9 +32,9 @@ public class CourseServiceImpl implements CourseService {
      * @return
      */
     @Override
-    public CourseDTO queryAll(CourseDTO dto) {
+    public CourseDTO queryAllAndNotCheck(CourseDTO dto) {
         PageHelper.startPage(dto.getCurrentPage(), dto.getSize());
-        List<Course> courseList = courseDao.queryAll();
+        List<Course> courseList = courseDao.queryAllAndNotCheck();
         PageInfo<Course> pageInfo = new PageInfo<Course>(courseList);
         dto.setPageInfo(pageInfo);
         return dto;

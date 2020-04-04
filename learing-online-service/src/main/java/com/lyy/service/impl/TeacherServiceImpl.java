@@ -51,6 +51,11 @@ public class TeacherServiceImpl implements TeacherService {
         return dto;
     }
 
+    @Override
+    public List<Teacher> queryAll() {
+        return teacherDao.queryAll();
+    }
+
     /**
      * 更新
      * @param teacherDTO

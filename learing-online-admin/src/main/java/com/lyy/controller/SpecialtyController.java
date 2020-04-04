@@ -6,6 +6,7 @@ import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.AppException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.SpecialtyDTO;
+import com.lyy.pojo.entity.Specialty;
 import com.lyy.pojo.vo.SpecialtyQueryVO;
 import com.lyy.pojo.vo.SpecialtyResponseVO;
 import com.lyy.service.SpecialtyService;
@@ -15,6 +16,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 学校专业管理 控制层
@@ -74,10 +77,29 @@ public class SpecialtyController {
             SpecialtyDTO specialtyDTO = specialtyService.queryAll(dto);
             specialtyResponseVO = converterUtil.copyPropertiesAndReturnNewOne(specialtyDTO, SpecialtyResponseVO.class);
         } catch (Exception e) {
+            throw new AppException(ErrorCode.SERVICE_ADMIN_ANNOUNCEMENT_QUERY_FAIL_ERROR, "专业信息查找失败");
+        }
+        return new CommonResponse<SpecialtyResponseVO>(new ResponseHead(StateCode.SUCCEED_CODE, "专业信息查找成功"), new ResponseBody<SpecialtyResponseVO>(specialtyResponseVO));
+    }
+
+    /**
+     * 查找所有专业信息
+     * @return
+     * @throws AppException
+     */
+    @ApiOperation(value = "查找全部专业信息", notes = "")
+    @ApiILog
+    @GetMapping("/query")
+    public CommonResponse<List<Specialty>> doQueryAll() throws AppException {
+        List<Specialty> specialtyList = null;
+        try {
+            specialtyList = specialtyService.queryAll();
+        } catch (Exception e) {
             throw new AppException(ErrorCode.SERVICE_ADMIN_ANNOUNCEMENT_QUERY_FAIL_ERROR, "管理公告信息查找失败");
         }
-        return new CommonResponse<SpecialtyResponseVO>(new ResponseHead(StateCode.SUCCEED_CODE, "管理员公告信息查找成功"), new ResponseBody<SpecialtyResponseVO>(specialtyResponseVO));
+        return new CommonResponse<List<Specialty>>(new ResponseHead(StateCode.SUCCEED_CODE, "管理员公告信息查找成功"), new ResponseBody<List<Specialty>>(specialtyList));
     }
+
 
     /**
      * 更新课程专业信息
@@ -116,6 +138,4 @@ public class SpecialtyController {
         }
         return new CommonResponse<String>(new ResponseHead(StateCode.SUCCEED_CODE, "专业信息删除成功"), new ResponseBody<String>("专业信息删除成功"));
     }
-
-
 }

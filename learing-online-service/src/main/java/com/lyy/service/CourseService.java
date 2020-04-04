@@ -14,7 +14,7 @@ public interface CourseService {
      * @param dto
      * @return
      */
-    CourseDTO queryAll(CourseDTO dto);
+    CourseDTO queryAllAndNotCheck(CourseDTO dto);
 
     /**
      * 更新

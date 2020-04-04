@@ -1,4 +1,4 @@
-package com.lyy.pojo.entity;
+package com.lyy.pojo.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Administrator implements Serializable {
+public class AdministratorQueryVO implements Serializable {
     private static final long serialVersionUID = -38982421546657014L;
 
     /**
@@ -47,5 +47,16 @@ public class Administrator implements Serializable {
      * 状态
      */
     private String state;
+
+    /**
+     * 数据条数
+     */
+    private Integer size;
+
+    /**
+     * 当前页
+     */
+    private Integer currentPage;
+
 
 }

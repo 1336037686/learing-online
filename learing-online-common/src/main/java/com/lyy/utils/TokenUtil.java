@@ -47,6 +47,13 @@ public class TokenUtil {
         }
     }
 
+    public static String getToken(String userId, String userName) {
+        Map<String, Object> tokenMap = new HashMap<>();
+        tokenMap.put("userId", userId);
+        tokenMap.put("userName", userName);
+        return getToken(tokenMap);
+    }
+
     /**解析token字符串
      * @param token token
      * @return token中payload的部分以map形式返回

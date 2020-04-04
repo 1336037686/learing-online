@@ -12,6 +12,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginResponseVO {
-    private String name;
+
+    /**
+     * 登录用户名
+     */
+    private String userName;
+
+    /**
+     * token
+     */
+    private String token;
 
 }

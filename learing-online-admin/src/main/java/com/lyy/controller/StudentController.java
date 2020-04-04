@@ -10,6 +10,7 @@ import com.lyy.pojo.vo.StudentQueryVO;
 import com.lyy.pojo.vo.StudentResponseVO;
 import com.lyy.service.StudentService;
 import com.lyy.utils.ConverterUtil;
+import com.lyy.utils.Md5Util;
 import com.lyy.utils.SnowFlakeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -49,6 +50,8 @@ public class StudentController {
             studentDTO.setId(SnowFlakeUtil.generateId() + "");
             //添加状态
             studentDTO.setState("0");
+            // 密码加密
+            studentDTO.setPassword(Md5Util.md5(studentDTO.getPassword()));
 
             boolean result = studentService.save(studentDTO);
         } catch (Exception e) {
@@ -90,7 +93,13 @@ public class StudentController {
     @PutMapping("/update")
     public CommonResponse<String> doUpdate(@org.springframework.web.bind.annotation.RequestBody CommonRequest<StudentQueryVO> vo) throws AppException {
         try {
-            studentService.update(converterUtil.copyComplicatedObjectAndReturnNewOne(vo.getBody().getData(), StudentDTO.class));
+            StudentDTO studentDTO = converterUtil.copyComplicatedObjectAndReturnNewOne(vo.getBody().getData(), StudentDTO.class);
+
+            if(studentDTO.getPassword().length() < 32) {
+                studentDTO.setPassword(Md5Util.md5(studentDTO.getPassword()));
+            }
+
+            studentService.update(studentDTO);
         } catch (Exception e) {
             e.printStackTrace();
             throw new AppException(ErrorCode.SERVICE_STUDENT_UPDATE_FAIL_ERROR, "学生账号更新失败");

@@ -1,5 +1,6 @@
-package com.lyy.pojo.entity;
+package com.lyy.pojo.vo;
 
+import com.github.pagehelper.PageInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Administrator implements Serializable {
+public class AdministratorResponseVO implements Serializable {
     private static final long serialVersionUID = -38982421546657014L;
 
     /**
@@ -47,5 +48,20 @@ public class Administrator implements Serializable {
      * 状态
      */
     private String state;
+
+    /**
+     * 数据条数
+     */
+    private Integer size;
+
+    /**
+     * 当前页
+     */
+    private Integer currentPage;
+
+    /**
+     * pageInfo
+     */
+    private PageInfo pageInfo;
 
 }

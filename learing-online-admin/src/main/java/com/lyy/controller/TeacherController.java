@@ -6,15 +6,19 @@ import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.AppException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.TeacherDTO;
+import com.lyy.pojo.entity.Teacher;
 import com.lyy.pojo.vo.TeacherQueryVO;
 import com.lyy.pojo.vo.TeacherResponseVO;
 import com.lyy.service.TeacherService;
 import com.lyy.utils.ConverterUtil;
+import com.lyy.utils.Md5Util;
 import com.lyy.utils.SnowFlakeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 教师账号管理 控制层
@@ -47,8 +51,10 @@ public class TeacherController {
 
             // 添加id
             teacherDTO.setId(SnowFlakeUtil.generateId() + "");
-            //添加状态
+            // 添加状态
             teacherDTO.setState("0");
+            // 密码加密
+            teacherDTO.setPassword(Md5Util.md5(teacherDTO.getPassword()));
 
             boolean result = teacherService.save(teacherDTO);
         } catch (Exception e) {
@@ -80,6 +86,24 @@ public class TeacherController {
     }
 
     /**
+     * 查找管理员公告信息
+     * @return
+     * @throws AppException
+     */
+    @ApiOperation(value = "查找所有教师账号信息", notes = "无")
+    @ApiILog
+    @GetMapping("/query")
+    public CommonResponse<List<Teacher>> doQueryAll() throws AppException {
+        List<Teacher> teacherResponseVOList = null;
+        try {
+            teacherResponseVOList = teacherService.queryAll();
+        } catch (Exception e) {
+            throw new AppException(ErrorCode.SERVICE_ADMIN_ANNOUNCEMENT_QUERY_FAIL_ERROR, "教师账号查找失败");
+        }
+        return new CommonResponse<List<Teacher>>(new ResponseHead(StateCode.SUCCEED_CODE, "教师账号查找成功"), new ResponseBody<List<Teacher>>(teacherResponseVOList));
+    }
+
+    /**
      * 更新课程教师账号
      * @param vo
      * @return
@@ -90,7 +114,13 @@ public class TeacherController {
     @PutMapping("/update")
     public CommonResponse<String> doUpdate(@org.springframework.web.bind.annotation.RequestBody CommonRequest<TeacherQueryVO> vo) throws AppException {
         try {
-            teacherService.update(converterUtil.copyComplicatedObjectAndReturnNewOne(vo.getBody().getData(), TeacherDTO.class));
+            TeacherDTO teacherDTO = converterUtil.copyComplicatedObjectAndReturnNewOne(vo.getBody().getData(), TeacherDTO.class);
+
+            if(teacherDTO.getPassword().length() < 32) {
+                teacherDTO.setPassword(Md5Util.md5(teacherDTO.getPassword()));
+            }
+
+            teacherService.update(teacherDTO);
         } catch (Exception e) {
             e.printStackTrace();
             throw new AppException(ErrorCode.SERVICE_TEACHER_UPDATE_FAIL_ERROR, "教师账号更新失败");

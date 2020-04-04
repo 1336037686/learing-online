@@ -1,6 +1,9 @@
 package com.lyy.service;
 
 import com.lyy.pojo.dto.SpecialtyDTO;
+import com.lyy.pojo.entity.Specialty;
+
+import java.util.List;
 
 /**
  * 专业
@@ -22,6 +25,12 @@ public interface SpecialtyService {
      * @return
      */
     SpecialtyDTO queryAll(SpecialtyDTO dto);
+
+    /**
+     * 查找专业信息
+     * @return
+     */
+    List<Specialty> queryAll();
 
     /**
      * 更新专业信息

@@ -50,6 +50,11 @@ public class SpecialtyServiceImpl implements SpecialtyService {
         return dto;
     }
 
+    @Override
+    public List<Specialty> queryAll() {
+        return specialtyDao.queryAll();
+    }
+
     /**
      * 更新
      * @param specialtyDTO

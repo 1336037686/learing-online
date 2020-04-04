@@ -1,5 +1,6 @@
 package com.lyy.controller;
 
+import com.lyy.authority.annotation.TokenVerify;
 import com.lyy.common.ResponseBody;
 import com.lyy.common.*;
 import com.lyy.exception.ErrorCode;
@@ -39,6 +40,7 @@ public class CategoryController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "保存课程类别信息", notes = "需要类别名称（必填信息）")
     @ApiILog
     @PostMapping("/save")

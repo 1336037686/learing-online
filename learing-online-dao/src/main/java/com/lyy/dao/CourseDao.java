@@ -32,6 +32,14 @@ public interface CourseDao {
     List<Course> queryAll();
 
     /**
+     * 查询所有
+     * @return
+     */
+    @Select("select * from course where state = 0 and checkState = 0")
+    List<Course> queryAllAndNotCheck();
+
+
+    /**
      * 按照id查找
      * @param id
      * @return
