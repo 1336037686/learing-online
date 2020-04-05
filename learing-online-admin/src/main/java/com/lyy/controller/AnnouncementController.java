@@ -1,5 +1,6 @@
 package com.lyy.controller;
 
+import com.lyy.authority.annotation.TokenVerify;
 import com.lyy.common.*;
 import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.AppException;
@@ -65,6 +66,7 @@ public class AnnouncementController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "保存管理员公告信息", notes = "需要公告名称，公告内容（必填信息）")
     @ApiILog
     @PostMapping("/save")
@@ -92,6 +94,7 @@ public class AnnouncementController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "删除管理员公告信息", notes = "需要公告ID.")
     @ApiILog
     @DeleteMapping("/remove")

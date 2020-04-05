@@ -98,6 +98,7 @@ public class CategoryController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "修改课程类别信息", notes = "id,类别名称，状态必填")
     @ApiILog
     @PutMapping("/update")
@@ -117,6 +118,7 @@ public class CategoryController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "删除课程类别信息", notes = "id（必填）")
     @ApiILog
     @DeleteMapping("/remove")

@@ -55,4 +55,11 @@ public interface TeacherDao {
     @Update("update teacher set state = 1 where id = #{id}")
     int remove(String id);
 
+    /**
+     * 按照姓名查找
+     * @param name
+     * @return
+     */
+    @Select("select * from teacher where state = 0 and name like CONCAT('%','${name}','%' )")
+    List<Teacher> queryByName(String name);
 }

@@ -72,4 +72,18 @@ public class StudentServiceImpl implements StudentService {
         studentDao.remove(id);
         return true;
     }
+
+    /**
+     * 条件查找
+     * @param dto
+     * @return
+     */
+    @Override
+    public StudentDTO queryByName(StudentDTO dto) {
+        PageHelper.startPage(dto.getCurrentPage(), dto.getSize());
+        List<Student> studentList = studentDao.queryByName(dto.getName());
+        PageInfo<Student> pageInfo = new PageInfo<Student>(studentList);
+        dto.setPageInfo(pageInfo);
+        return dto;
+    }
 }

@@ -77,4 +77,18 @@ public class TeacherServiceImpl implements TeacherService {
         teacherDao.remove(id);
         return true;
     }
+
+    /**
+     * 按照姓名查找
+     * @param dto
+     * @return
+     */
+    @Override
+    public TeacherDTO queryByName(TeacherDTO dto) {
+        PageHelper.startPage(dto.getCurrentPage(), dto.getSize());
+        List<Teacher> teacherList = teacherDao.queryByName(dto.getName());
+        PageInfo<Teacher> pageInfo = new PageInfo<Teacher>(teacherList);
+        dto.setPageInfo(pageInfo);
+        return dto;
+    }
 }

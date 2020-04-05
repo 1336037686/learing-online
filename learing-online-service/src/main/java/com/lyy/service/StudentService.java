@@ -36,4 +36,11 @@ public interface StudentService {
      * @return
      */
     boolean remove(String id);
+
+    /**
+     * 条件查找
+     * @param dto
+     * @return
+     */
+    StudentDTO queryByName(StudentDTO dto);
 }

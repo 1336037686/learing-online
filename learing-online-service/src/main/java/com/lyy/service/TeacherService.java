@@ -46,4 +46,11 @@ public interface TeacherService {
      * @return
      */
     boolean remove(String id);
+
+    /**
+     * 教师姓名查找
+     * @param dto
+     * @return
+     */
+    TeacherDTO queryByName(TeacherDTO dto);
 }

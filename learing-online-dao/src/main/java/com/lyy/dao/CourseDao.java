@@ -63,4 +63,11 @@ public interface CourseDao {
     @Update("update course set state = 1 where id = #{id}")
     int remove(String id);
 
+    /**
+     * 按照课程名称模糊查找
+     * @param name
+     * @return
+     */
+    @Select("select * from course where state = 0 and name like CONCAT('%','${name}','%' )")
+    List<Course> queryByName(String name);
 }

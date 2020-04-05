@@ -23,4 +23,10 @@ public interface CourseService {
      */
     boolean update(CourseDTO courseDTO);
 
+    /**
+     * 按照课程名称模糊查找
+     * @param dto
+     * @return
+     */
+    CourseDTO queryByName(CourseDTO dto);
 }

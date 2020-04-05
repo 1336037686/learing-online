@@ -51,4 +51,18 @@ public class CourseServiceImpl implements CourseService {
         return true;
     }
 
+    /**
+     * 课程名称模糊查找
+     * @param dto
+     * @return
+     */
+    @Override
+    public CourseDTO queryByName(CourseDTO dto) {
+        PageHelper.startPage(dto.getCurrentPage(), dto.getSize());
+        List<Course> courseList = courseDao.queryByName(dto.getName());
+        PageInfo<Course> pageInfo = new PageInfo<Course>(courseList);
+        dto.setPageInfo(pageInfo);
+        return dto;
+    }
+
 }

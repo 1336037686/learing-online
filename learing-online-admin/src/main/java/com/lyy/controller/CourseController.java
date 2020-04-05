@@ -1,5 +1,6 @@
 package com.lyy.controller;
 
+import com.lyy.authority.annotation.TokenVerify;
 import com.lyy.common.*;
 import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.AppException;
@@ -33,6 +34,27 @@ public class CourseController {
     @Autowired
     private ConverterUtil converterUtil;
 
+    /**
+     * 分页查找管理员公告信息
+     * @param vo
+     * @return
+     * @throws AppException
+     */
+    @ApiOperation(value = "关键字查找课程信息信息", notes = "需要页号，长度范围，关键字.")
+    @ApiILog
+    @PostMapping("/condition")
+    public CommonResponse<CourseResponseVO> doQueryByName(@org.springframework.web.bind.annotation.RequestBody CommonRequest<CourseQueryVO> vo) throws AppException {
+        CourseDTO dto = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), CourseDTO.class);
+        CourseResponseVO courseResponseVO = null;
+        try {
+            CourseDTO courseDTO = courseService.queryByName(dto);
+            courseResponseVO = converterUtil.copyPropertiesAndReturnNewOne(courseDTO, CourseResponseVO.class);
+        } catch (Exception e) {
+            throw new AppException(ErrorCode.SERVICE_COURSE_QUERY_FAIL_ERROR, "课程信息查找失败");
+        }
+        return new CommonResponse<CourseResponseVO>(new ResponseHead(StateCode.SUCCEED_CODE, "课程信息查找成功"), new ResponseBody<CourseResponseVO>(courseResponseVO));
+    }
+
 
     /**
      * 分页查找管理员公告信息
@@ -61,6 +83,7 @@ public class CourseController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "修改课程信息", notes = "id,类别名称，状态必填")
     @ApiILog
     @PutMapping("/update")

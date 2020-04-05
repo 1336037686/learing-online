@@ -1,5 +1,6 @@
 package com.lyy.controller;
 
+import com.lyy.authority.annotation.TokenVerify;
 import com.lyy.common.ResponseBody;
 import com.lyy.common.*;
 import com.lyy.exception.ErrorCode;
@@ -40,6 +41,7 @@ public class DepartmentController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "保存院系信息", notes = "需要类别名称（必填信息）")
     @ApiILog
     @PostMapping("/save")
@@ -97,6 +99,7 @@ public class DepartmentController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "修改院系信息", notes = "id,类别名称，状态必填")
     @ApiILog
     @PutMapping("/update")
@@ -116,6 +119,7 @@ public class DepartmentController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "删除院系信息", notes = "id（必填）")
     @ApiILog
     @DeleteMapping("/remove")

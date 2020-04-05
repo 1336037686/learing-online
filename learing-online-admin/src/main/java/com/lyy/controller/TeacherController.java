@@ -1,5 +1,6 @@
 package com.lyy.controller;
 
+import com.lyy.authority.annotation.TokenVerify;
 import com.lyy.common.ResponseBody;
 import com.lyy.common.*;
 import com.lyy.exception.ErrorCode;
@@ -42,6 +43,7 @@ public class TeacherController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "保存教师账号", notes = "需要类别名称（必填信息）")
     @ApiILog
     @PostMapping("/save")
@@ -86,6 +88,27 @@ public class TeacherController {
     }
 
     /**
+     * 条件查找管理员公告信息
+     * @param vo
+     * @return
+     * @throws AppException
+     */
+    @ApiOperation(value = "条件查找教师账号信息", notes = "需要页号，长度范围，姓名.")
+    @ApiILog
+    @PostMapping("/condition")
+    public CommonResponse<TeacherResponseVO> doQueryByName(@org.springframework.web.bind.annotation.RequestBody CommonRequest<TeacherQueryVO> vo) throws AppException {
+        TeacherDTO dto = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), TeacherDTO.class);
+        TeacherResponseVO teacherResponseVO = null;
+        try {
+            TeacherDTO teacherDTO = teacherService.queryByName(dto);
+            teacherResponseVO = converterUtil.copyPropertiesAndReturnNewOne(teacherDTO, TeacherResponseVO.class);
+        } catch (Exception e) {
+            throw new AppException(ErrorCode.SERVICE_ADMIN_ANNOUNCEMENT_QUERY_FAIL_ERROR, "教师账号查找失败");
+        }
+        return new CommonResponse<TeacherResponseVO>(new ResponseHead(StateCode.SUCCEED_CODE, "教师账号查找成功"), new ResponseBody<TeacherResponseVO>(teacherResponseVO));
+    }
+
+    /**
      * 查找管理员公告信息
      * @return
      * @throws AppException
@@ -109,6 +132,7 @@ public class TeacherController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "修改教师账号", notes = "id,类别名称，状态必填")
     @ApiILog
     @PutMapping("/update")
@@ -134,6 +158,7 @@ public class TeacherController {
      * @return
      * @throws AppException
      */
+    @TokenVerify(required = true)
     @ApiOperation(value = "删除教师账号", notes = "id（必填）")
     @ApiILog
     @DeleteMapping("/remove")
