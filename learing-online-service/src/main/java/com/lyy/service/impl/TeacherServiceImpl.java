@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.lyy.dao.TeacherDao;
 import com.lyy.pojo.dto.TeacherDTO;
 import com.lyy.pojo.entity.Teacher;
+import com.lyy.pojo.entity.extend.TeacherExtend;
 import com.lyy.service.TeacherService;
 import com.lyy.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,14 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherDTO queryAll(TeacherDTO dto) {
         PageHelper.startPage(dto.getCurrentPage(), dto.getSize());
-        List<Teacher> teacherList = teacherDao.queryAll();
-        PageInfo<Teacher> pageInfo = new PageInfo<Teacher>(teacherList);
+        List<TeacherExtend> teacherList = teacherDao.queryAll();
+        PageInfo<TeacherExtend> pageInfo = new PageInfo<TeacherExtend>(teacherList);
         dto.setPageInfo(pageInfo);
         return dto;
     }
 
     @Override
-    public List<Teacher> queryAll() {
+    public List<TeacherExtend> queryAll() {
         return teacherDao.queryAll();
     }
 
@@ -90,5 +91,28 @@ public class TeacherServiceImpl implements TeacherService {
         PageInfo<Teacher> pageInfo = new PageInfo<Teacher>(teacherList);
         dto.setPageInfo(pageInfo);
         return dto;
+    }
+
+    /**
+     * 按照id 查找
+     * @param id
+     * @return
+     */
+    @Override
+    public TeacherDTO queryById(String id) {
+        TeacherExtend teacher = teacherDao.queryById(id);
+        teacher.setPassword(null);
+        return converterUtil.copyPropertiesAndReturnNewOne(teacher, TeacherDTO.class);
+    }
+
+    /**
+     * 修改密码
+     * @param teacherDTO
+     * @return
+     */
+    @Override
+    public boolean updatePassword(TeacherDTO teacherDTO) {
+        teacherDao.updatePassword(teacherDTO.getId(), teacherDTO.getPassword());
+        return true;
     }
 }

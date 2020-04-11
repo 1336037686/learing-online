@@ -1,6 +1,7 @@
 package com.lyy.dao;
 
 import com.lyy.pojo.entity.Teacher;
+import com.lyy.pojo.entity.extend.TeacherExtend;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -28,16 +29,16 @@ public interface TeacherDao {
      * 查询所有
      * @return
      */
-    @Select("select * from teacher where state = 0")
-    List<Teacher> queryAll();
+    @Select("SELECT teacher.*,department.name AS 'departmentName' FROM teacher,department WHERE department.id = teacher.department AND teacher.state = 0")
+    List<TeacherExtend> queryAll();
 
     /**
      * 按照id查找
      * @param id
      * @return
      */
-    @Select("select * from teacher where state = 0 and id = #{id}")
-    Teacher queryById(String id);
+    @Select("SELECT teacher.*,department.name AS 'departmentName' FROM teacher,department WHERE department.id = teacher.department AND teacher.state = 0 AND teacher.id = #{id}")
+    TeacherExtend queryById(String id);
 
     /**
      * 更新
@@ -62,4 +63,20 @@ public interface TeacherDao {
      */
     @Select("select * from teacher where state = 0 and name like CONCAT('%','${name}','%' )")
     List<Teacher> queryByName(String name);
+
+    /**
+     * 按照账号查找
+     * @param userName
+     * @return
+     */
+    @Select("select * from teacher where state = 0 and username = #{userName}")
+    Teacher queryByUserName(String userName);
+
+    /**
+     * 修改密码
+     * @param id
+     * @return
+     */
+    @Update("update teacher set password = #{password} where id = #{id}")
+    int updatePassword(String id, String password);
 }

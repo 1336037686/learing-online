@@ -56,6 +56,11 @@ public class TeacherResponseVO {
     private String department;
 
     /**
+     * 院系名称
+     */
+    private String departmentName;
+
+    /**
      * 邮箱
      */
     private String email;

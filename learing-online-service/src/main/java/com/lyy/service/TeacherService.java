@@ -1,7 +1,7 @@
 package com.lyy.service;
 
 import com.lyy.pojo.dto.TeacherDTO;
-import com.lyy.pojo.entity.Teacher;
+import com.lyy.pojo.entity.extend.TeacherExtend;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public interface TeacherService {
      * 查找教师信息
      * @return
      */
-    List<Teacher> queryAll();
+    List<TeacherExtend> queryAll();
 
 
     /**
@@ -53,4 +53,18 @@ public interface TeacherService {
      * @return
      */
     TeacherDTO queryByName(TeacherDTO dto);
+
+    /**
+     * 教师ID查找
+     * @param id
+     * @return
+     */
+    TeacherDTO queryById(String id);
+
+    /**
+     * 修改密码
+     * @param teacherDTO
+     * @return
+     */
+    boolean updatePassword(TeacherDTO teacherDTO);
 }

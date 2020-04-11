@@ -14,6 +14,11 @@ import lombok.NoArgsConstructor;
 public class LoginResponseVO {
 
     /**
+     * id
+     */
+    private String id;
+
+    /**
      * 登录用户名
      */
     private String userName;

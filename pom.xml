@@ -69,6 +69,7 @@
         <module>learing-online-service</module>
         <module>learing-online-common</module>
         <module>learing-online-admin</module>
+        <module>learning-online-teacher</module>
     </modules>
 
     <build>

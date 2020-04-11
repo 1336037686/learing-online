@@ -8,6 +8,7 @@ import com.lyy.exception.base.AppException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.TeacherDTO;
 import com.lyy.pojo.entity.Teacher;
+import com.lyy.pojo.entity.extend.TeacherExtend;
 import com.lyy.pojo.vo.TeacherQueryVO;
 import com.lyy.pojo.vo.TeacherResponseVO;
 import com.lyy.service.TeacherService;
@@ -119,7 +120,8 @@ public class TeacherController {
     public CommonResponse<List<Teacher>> doQueryAll() throws AppException {
         List<Teacher> teacherResponseVOList = null;
         try {
-            teacherResponseVOList = teacherService.queryAll();
+            List<TeacherExtend> teacherExtends = teacherService.queryAll();
+            teacherResponseVOList = converterUtil.convertList(teacherExtends, Teacher.class);
         } catch (Exception e) {
             throw new AppException(ErrorCode.SERVICE_ADMIN_ANNOUNCEMENT_QUERY_FAIL_ERROR, "教师账号查找失败");
         }
