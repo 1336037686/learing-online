@@ -1,10 +1,8 @@
 package com.lyy.dao;
 
+import com.lyy.dao.help.CourseProvider;
 import com.lyy.pojo.entity.Course;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -48,11 +46,19 @@ public interface CourseDao {
     Course queryById(String id);
 
     /**
+     * 按照教师id查找
+     * @param teacher
+     * @return
+     */
+    @Select("select * from course where state = 0 and teacher = #{teacher}")
+    List<Course> queryByTeacher(String teacher);
+
+    /**
      * 更新
      * @param course
      * @return
      */
-    @Update("update course set name = #{name}, time = #{time}, intro = #{intro}, type = #{type}, cover = #{cover}, teacher = #{teacher}, checkState = #{checkState} where id = #{id}")
+    @UpdateProvider(type = CourseProvider.class, method = "update")
     int update(Course course);
 
     /**
@@ -70,4 +76,7 @@ public interface CourseDao {
      */
     @Select("select * from course where state = 0 and name like CONCAT('%','${name}','%' )")
     List<Course> queryByName(String name);
+
+
+
 }

@@ -36,8 +36,18 @@ public class CdnParam {
     private String bucketName;
 
     /**
-     * /阿里云API的文件夹名称
+     * /阿里云API的图片文件夹名称
      */
-    private String folder;
+    private String imageFolder;
+
+    /**
+     * /阿里云API的视频文件夹名称
+     */
+    private String videoFolder;
+
+    /**
+     * /阿里云API的资源文件夹名称
+     */
+    private String resourceFolder;
 
 }

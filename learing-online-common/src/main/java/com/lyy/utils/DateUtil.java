@@ -31,6 +31,12 @@ public class DateUtil {
     public static final String DATE_PATTERN_DATETIME = "yyyy-MM-dd HH:mm:ss";
 
     /**
+     * 全部元素，精确到毫秒 yyyyMMddHHmmssSSS
+     */
+    public static final String DATE_PATTERN_ALLPARAM = "yyyyMMddHHmmssSSS";
+
+
+    /**
      * 时期格式 yyyy-MM-dd
      */
     public static DateFormat dateformater;

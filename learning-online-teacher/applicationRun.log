@@ -1,0 +1,48 @@
+2020-04-12 16:28:47.675  INFO 22924 --- [main] .l.LearningOnlineTeacherApplicationTests : Starting LearningOnlineTeacherApplicationTests on DESKTOP-F4CCISB with PID 22924 (started by LGX in E:\DevelopProjects\Java_Project\idea_project\lyy\learing-online\learning-online-teacher)
+2020-04-12 16:28:47.677  INFO 22924 --- [main] .l.LearningOnlineTeacherApplicationTests : No active profile set, falling back to default profiles: default
+2020-04-12 16:28:54.638  INFO 22924 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-12 16:28:55.491  INFO 22924 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-12 16:28:57.126  INFO 22924 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-04-12 16:28:57.816  INFO 22924 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-12 16:28:58.414  INFO 22924 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-04-12 16:28:58.479  INFO 22924 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-04-12 16:28:58.532  INFO 22924 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-04-12 16:28:58.864  INFO 22924 --- [main] .l.LearningOnlineTeacherApplicationTests : Started LearningOnlineTeacherApplicationTests in 12.121 seconds (JVM running for 16.258)
+2020-04-12 16:29:00.757  INFO 22924 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-12 16:29:00.807  INFO 22924 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-04-12 16:57:44.759  INFO 21260 --- [main] .l.LearningOnlineTeacherApplicationTests : Starting LearningOnlineTeacherApplicationTests on DESKTOP-F4CCISB with PID 21260 (started by LGX in E:\DevelopProjects\Java_Project\idea_project\lyy\learing-online\learning-online-teacher)
+2020-04-12 16:57:44.761  INFO 21260 --- [main] .l.LearningOnlineTeacherApplicationTests : No active profile set, falling back to default profiles: default
+2020-04-12 16:57:49.227  INFO 21260 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-12 16:57:49.846  INFO 21260 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-12 16:57:51.586  INFO 21260 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-04-12 16:57:52.555  INFO 21260 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-12 16:57:53.329  INFO 21260 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-04-12 16:57:53.368  INFO 21260 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-04-12 16:57:53.422  INFO 21260 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-04-12 16:57:53.747  INFO 21260 --- [main] .l.LearningOnlineTeacherApplicationTests : Started LearningOnlineTeacherApplicationTests in 9.588 seconds (JVM running for 11.192)
+2020-04-12 16:57:54.602  INFO 21260 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-12 16:57:54.624  INFO 21260 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-04-12 17:01:07.886  INFO 29168 --- [main] .l.LearningOnlineTeacherApplicationTests : Starting LearningOnlineTeacherApplicationTests on DESKTOP-F4CCISB with PID 29168 (started by LGX in E:\DevelopProjects\Java_Project\idea_project\lyy\learing-online\learning-online-teacher)
+2020-04-12 17:01:07.889  INFO 29168 --- [main] .l.LearningOnlineTeacherApplicationTests : No active profile set, falling back to default profiles: default
+2020-04-12 17:01:12.301  INFO 29168 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-12 17:01:12.794  INFO 29168 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-12 17:01:13.977  INFO 29168 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-04-12 17:01:14.471  INFO 29168 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-12 17:01:15.079  INFO 29168 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-04-12 17:01:15.124  INFO 29168 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-04-12 17:01:15.179  INFO 29168 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-04-12 17:01:15.555  INFO 29168 --- [main] .l.LearningOnlineTeacherApplicationTests : Started LearningOnlineTeacherApplicationTests in 8.24 seconds (JVM running for 9.922)
+2020-04-12 17:01:16.337  INFO 29168 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-12 17:01:16.355  INFO 29168 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed
+2020-04-12 17:04:19.572  INFO 26172 --- [main] .l.LearningOnlineTeacherApplicationTests : Starting LearningOnlineTeacherApplicationTests on DESKTOP-F4CCISB with PID 26172 (started by LGX in E:\DevelopProjects\Java_Project\idea_project\lyy\learing-online\learning-online-teacher)
+2020-04-12 17:04:19.574  INFO 26172 --- [main] .l.LearningOnlineTeacherApplicationTests : No active profile set, falling back to default profiles: default
+2020-04-12 17:04:23.097  INFO 26172 --- [main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2020-04-12 17:04:23.627  INFO 26172 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2020-04-12 17:04:24.834  INFO 26172 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2020-04-12 17:04:25.354  INFO 26172 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-12 17:04:26.004  INFO 26172 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2020-04-12 17:04:26.051  INFO 26172 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2020-04-12 17:04:26.105  INFO 26172 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2020-04-12 17:04:26.420  INFO 26172 --- [main] .l.LearningOnlineTeacherApplicationTests : Started LearningOnlineTeacherApplicationTests in 7.742 seconds (JVM running for 9.544)
+2020-04-12 17:04:32.602  INFO 26172 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-12 17:04:32.623  INFO 26172 --- [SpringContextShutdownHook] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed

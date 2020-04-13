@@ -210,25 +210,66 @@ public final class ErrorCode {
 
     // ################# 课程信息管理模块 #################
     /**
-     * 教师保存错误
+     * 课程信息保存错误
      */
     public static final String SERVICE_COURSE_SAVE_FAIL_ERROR = "216001";
 
     /**
-     * 教师删除错误
+     * 课程信息删除错误
      */
     public static final String SERVICE_COURSE_DELETE_FAIL_ERROR = "216002";
 
     /**
-     * 教师更新错误
+     * 课程信息更新错误
      */
     public static final String SERVICE_COURSE_UPDATE_FAIL_ERROR = "216003";
 
     /**
-     * 教师查询错误
+     * 课程信息查询错误
      */
     public static final String SERVICE_COURSE_QUERY_FAIL_ERROR = "216004";
 
+    // ################# 课程章节信息管理模块 #################
+    /**
+     * 课程章节信息保存错误
+     */
+    public static final String SERVICE_SECTION_SAVE_FAIL_ERROR = "221001";
+
+    /**
+     * 课程章节信息删除错误
+     */
+    public static final String SERVICE_SECTION_DELETE_FAIL_ERROR = "221002";
+
+    /**
+     * 课程章节信息更新错误
+     */
+    public static final String SERVICE_SECTION_UPDATE_FAIL_ERROR = "221003";
+
+    /**
+     * 课程章节信息查询错误
+     */
+    public static final String SERVICE_SECTION_QUERY_FAIL_ERROR = "221004";
+
+    // ################# 章节视频信息管理模块 #################
+    /**
+     * 课程章节视频信息保存错误
+     */
+    public static final String SERVICE_VIDEO_SAVE_FAIL_ERROR = "222001";
+
+    /**
+     * 课程章节视频信息删除错误
+     */
+    public static final String SERVICE_VIDEO_DELETE_FAIL_ERROR = "222002";
+
+    /**
+     * 课程章节视频信息更新错误
+     */
+    public static final String SERVICE_VIDEO_UPDATE_FAIL_ERROR = "222003";
+
+    /**
+     * 课程章节视频信息查询错误
+     */
+    public static final String SERVICE_VIDEO_QUERY_FAIL_ERROR = "222004";
 
 
 }

@@ -3,6 +3,7 @@ package com.lyy.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lyy.dao.AdminAnnouncementDao;
+import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.AdminAnnouncementConditionDTO;
 import com.lyy.pojo.dto.AdminAnnouncementDTO;
 import com.lyy.pojo.entity.AdminAnnouncement;
@@ -34,7 +35,7 @@ public class AdminAnnouncementServiceImpl implements AdminAnnouncementService {
      * @throws Exception
      */
     @Override
-    public boolean save(AdminAnnouncementDTO dto) throws Exception {
+    public boolean save(AdminAnnouncementDTO dto) throws BussinessException {
         AdminAnnouncement announcement = converterUtil.copyPropertiesAndReturnNewOne(dto, AdminAnnouncement.class);
         adminAnnouncementDao.save(announcement);
         return true;

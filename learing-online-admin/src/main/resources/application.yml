@@ -69,11 +69,14 @@ bossoft:
     version: v1.0
   # Cdn配置
   cdn:
-    endPoint: oss-cn-shanghai.aliyuncs.com
-    accessKeyId: LTAIGTcfXJNBfkTM
-    accessKeySelect: jS1vjMOQfV35Jbo7ULDNRiyz5qZ2mM
-    bucketName: pkying
-    folder: image/
+    endPoint: oss-cn-shenzhen.aliyuncs.com
+    accessKeyId: LTAIeh9HSUIOFLPX
+    accessKeySelect: t8cacC2tjcYGvTmTStTXYLsJeEdnwG
+    bucketName: lgx-tvt
+    imageFolder: image/
+    videoFolder: video/
+    resourceFolder: resource/
+
   # Sms短信服务配置
   sms:
     defaultConnectTimeout: sun.net.client.defaultConnectTimeout

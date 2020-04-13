@@ -15,8 +15,8 @@ import com.lyy.utils.Md5Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author LGX_TvT
@@ -54,12 +54,31 @@ public class TeacherController {
         return new CommonResponse<TeacherResponseVO>(new ResponseHead(StateCode.SUCCEED_CODE, "教师信息查找成功"), new ResponseBody<TeacherResponseVO>(teacherResponseVO));
     }
 
+    /**
+     * 修改密码
+     * @return
+     */
+    @TokenVerify(required = true)
+    @ApiOperation(value = "修改教师基础信息", notes = "需要基础信息.")
+    @ApiILog
+    @PutMapping("/update/info")
+    public CommonResponse<String> doUpdateInfo(@RequestBody CommonRequest<TeacherQueryVO> vo) {
+        try {
+            TeacherDTO teacherDTO = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), TeacherDTO.class);
+            teacherDTO.setPassword(Md5Util.md5(vo.getBody().getData().getPassword()));
+            boolean result = teacherService.updatePassword(teacherDTO);
+        } catch (Exception e) {
+            throw new AppException(ErrorCode.SERVICE_TEACHER_UPDATE_FAIL_ERROR, "密码修改失败");
+        }
+        return new CommonResponse<String>(new ResponseHead(StateCode.SUCCEED_CODE, "密码修改成功"), new ResponseBody<>("密码修改成功"));
+    }
+
 
     /**
      * 修改密码
      * @return
      */
-    @TokenVerify(required = false)
+    @TokenVerify(required = true)
     @ApiOperation(value = "修改教师密码", notes = "需要教师ID, 教师新密码.")
     @ApiILog
     @PutMapping("/update/password")

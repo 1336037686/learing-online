@@ -73,7 +73,9 @@ bossoft:
     accessKeyId: LTAIeh9HSUIOFLPX
     accessKeySelect: t8cacC2tjcYGvTmTStTXYLsJeEdnwG
     bucketName: lgx-tvt
-    folder: image/
+    imageFolder: image/
+    videoFolder: video/
+    resourceFolder: resource/
   # Sms短信服务配置
   sms:
     defaultConnectTimeout: sun.net.client.defaultConnectTimeout
