@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ *
+ * 公告管理
  * @author LGX_TvT
  * @date 2020-04-10 18:00
  */
@@ -22,6 +24,6 @@ public class AnnouncementController {
     // TODO：按照ID查找公告
 
 
-    // TODO：查找公告
+    // TODO：教师ID查找公告
 
 }
