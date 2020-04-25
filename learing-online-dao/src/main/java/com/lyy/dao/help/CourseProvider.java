@@ -28,6 +28,9 @@ public class CourseProvider {
         if(StringUtil.isNotEmpty(course.getIntro())) {
             list.add(" intro = #{intro}");
         }
+        if(StringUtil.isNotEmpty(course.getType())) {
+            list.add(" type = #{type}");
+        }
         if(StringUtil.isNotEmpty(course.getCover())) {
             list.add(" cover = #{cover}");
         }

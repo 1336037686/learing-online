@@ -2,6 +2,9 @@ package com.lyy.service;
 
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.VideoDTO;
+import com.lyy.pojo.entity.Video;
+
+import java.util.List;
 
 /**
  * @author LGX_TvT
@@ -31,4 +34,11 @@ public interface VideoService {
      * @throws BussinessException
      */
     boolean update(VideoDTO videoDTO) throws BussinessException;
+
+    /**
+     * 按照课程ID与章节ID查询视频
+     * @param videoDTO
+     * @return
+     */
+    List<Video> queryAllByCourseAndSection(VideoDTO videoDTO);
 }

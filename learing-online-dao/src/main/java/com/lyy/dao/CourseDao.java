@@ -2,6 +2,7 @@ package com.lyy.dao;
 
 import com.lyy.dao.help.CourseProvider;
 import com.lyy.pojo.entity.Course;
+import com.lyy.pojo.entity.extend.CourseExtend;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -50,8 +51,19 @@ public interface CourseDao {
      * @param teacher
      * @return
      */
-    @Select("select * from course where state = 0 and teacher = #{teacher}")
-    List<Course> queryByTeacher(String teacher);
+    @Select("SELECT course.*, teacher.name AS 'teacherName', category.category_name AS 'typeName' FROM course,teacher,category " +
+            "WHERE category.id = course.type AND teacher.id = course.teacher AND course.state = 0 AND course.teacher = #{teacher}")
+    List<CourseExtend> queryByTeacher(String teacher);
+
+    /**
+     * 按照教师id查找
+     * @param teacher
+     * @return
+     */
+    @Select("SELECT course.*, teacher.name AS 'teacherName', category.category_name AS 'typeName' FROM course,teacher,category " +
+            "WHERE category.id = course.type AND teacher.id = course.teacher AND course.checkState = 1 AND course.state = 0 AND course.teacher = #{teacher}")
+    List<CourseExtend> queryAllPassByTeacher(String teacher);
+
 
     /**
      * 更新

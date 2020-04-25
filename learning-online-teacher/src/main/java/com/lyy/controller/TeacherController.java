@@ -65,12 +65,11 @@ public class TeacherController {
     public CommonResponse<String> doUpdateInfo(@RequestBody CommonRequest<TeacherQueryVO> vo) {
         try {
             TeacherDTO teacherDTO = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), TeacherDTO.class);
-            teacherDTO.setPassword(Md5Util.md5(vo.getBody().getData().getPassword()));
-            boolean result = teacherService.updatePassword(teacherDTO);
+            boolean result = teacherService.update(teacherDTO);
         } catch (Exception e) {
-            throw new AppException(ErrorCode.SERVICE_TEACHER_UPDATE_FAIL_ERROR, "密码修改失败");
+            throw new AppException(ErrorCode.SERVICE_TEACHER_UPDATE_FAIL_ERROR, "教师信息修改失败");
         }
-        return new CommonResponse<String>(new ResponseHead(StateCode.SUCCEED_CODE, "密码修改成功"), new ResponseBody<>("密码修改成功"));
+        return new CommonResponse<String>(new ResponseHead(StateCode.SUCCEED_CODE, "教师信息修改成功"), new ResponseBody<>("教师信息修改成功"));
     }
 
 

@@ -1,11 +1,9 @@
 package com.lyy.dao;
 
+import com.lyy.dao.help.TeacherProvider;
 import com.lyy.pojo.entity.Teacher;
 import com.lyy.pojo.entity.extend.TeacherExtend;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -45,7 +43,7 @@ public interface TeacherDao {
      * @param teacher
      * @return
      */
-    @Update("update teacher set name = #{name}, sex = #{sex}, phone = #{phone}, password = #{password}, address = #{address}, department = #{department}, email = #{email} where id = #{id}")
+    @UpdateProvider(type = TeacherProvider.class, method = "update")
     int update(Teacher teacher);
 
     /**

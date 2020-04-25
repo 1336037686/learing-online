@@ -2,6 +2,9 @@ package com.lyy.service;
 
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.SectionDTO;
+import com.lyy.pojo.entity.Section;
+
+import java.util.List;
 
 /**
  * @author LGX_TvT
@@ -29,4 +32,11 @@ public interface SectionService {
      * @return
      */
     boolean remove(SectionDTO sectionDTO) throws BussinessException;
+
+    /**
+     * 按照课程ID查询章节
+     * @param sectionDTO
+     * @return
+     */
+    List<Section> queryAllByCourse(SectionDTO sectionDTO);
 }

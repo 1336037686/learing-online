@@ -8,6 +8,7 @@ import com.lyy.exception.base.AppException;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.VideoDTO;
+import com.lyy.pojo.entity.Video;
 import com.lyy.pojo.vo.VideoQueryVO;
 import com.lyy.service.VideoService;
 import com.lyy.utils.ConverterUtil;
@@ -17,6 +18,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 课程视频控制层
@@ -113,6 +116,26 @@ public class VideoController {
     }
     
     // TODO：按照课程ID与章节ID查询视频
+    @TokenVerify(required = false)
+    @ApiOperation(value = "按照课程ID与章节ID查询视频", notes = "课程ID与章节ID")
+    @ApiILog
+    @GetMapping("/query/course/{courseId}/{sectionId}")
+    public CommonResponse<List<Video>> doQueryAllByCourse(@PathVariable("courseId") String courseId, @PathVariable("sectionId") String sectionId) {
+        List<Video> list = null;
+        try {
+            VideoDTO videoDTO = new VideoDTO();
+            videoDTO.setCourse(courseId);
+            videoDTO.setSection(sectionId);
+            list = videoService.queryAllByCourseAndSection(videoDTO);
+        } catch (BussinessException b) {
+            b.printStackTrace();
+            throw new AppException(b.getCode(), b.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ErrorCode.SERVICE_SECTION_DELETE_FAIL_ERROR, "章节视频信息查找失败");
+        }
+        return new CommonResponse<List<Video>>(new ResponseHead(StateCode.SUCCEED_CODE, "章节视频信息查找成功"), new ResponseBody<List<Video>>(list));
+    }
 
 
 }

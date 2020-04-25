@@ -10,6 +10,8 @@ import com.lyy.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author LGX_TvT
  * @date 2020-04-13 21:47
@@ -74,5 +76,20 @@ public class VideoServiceImpl implements VideoService {
             throw new BussinessException(ErrorCode.SERVICE_VIDEO_UPDATE_FAIL_ERROR, "视频信息修改失败");
         }
         return true;
+    }
+
+    /**
+     * 按照课程ID与章节ID查询视频
+     * @param videoDTO
+     * @return
+     */
+    @Override
+    public List<Video> queryAllByCourseAndSection(VideoDTO videoDTO) {
+        try {
+            return videoDao.queryAllByCourseAndSection(videoDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_SECTION_DELETE_FAIL_ERROR, "视频信息查找失败");
+        }
     }
 }

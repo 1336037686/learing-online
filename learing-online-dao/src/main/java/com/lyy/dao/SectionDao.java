@@ -2,10 +2,9 @@ package com.lyy.dao;
 
 import com.lyy.dao.help.SectionProvider;
 import com.lyy.pojo.entity.Section;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.UpdateProvider;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 /**
  * @author LGX_TvT
@@ -37,4 +36,12 @@ public interface SectionDao {
      */
     @Update("update section set state = 1 where id = #{id}")
     int remove(String id);
+
+    /**
+     * 按照课程ID查询章节
+     * @param course
+     * @return
+     */
+    @Select("SELECT * FROM section WHERE state = 0 AND course = #{course} ORDER BY `order` ASC ")
+    List<Section> queryAllByCourse(String course);
 }

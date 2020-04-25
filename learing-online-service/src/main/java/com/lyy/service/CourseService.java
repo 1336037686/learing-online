@@ -2,6 +2,9 @@ package com.lyy.service;
 
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.CourseDTO;
+import com.lyy.pojo.entity.extend.CourseExtend;
+
+import java.util.List;
 
 /**
  * 专业
@@ -52,6 +55,14 @@ public interface CourseService {
      * @throws BussinessException
      */
     CourseDTO queryByTeacher(CourseDTO courseDTO) throws BussinessException;
+
+    /**
+     * 按照教师查找所有已经审核通过的课程信息
+     * @param courseDTO
+     * @return
+     * @throws BussinessException
+     */
+    List<CourseExtend> queryAllPassByTeacher(CourseDTO courseDTO) throws BussinessException;
 
     /**
      * 按照课程ID查找课程信息

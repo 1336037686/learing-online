@@ -7,6 +7,7 @@ import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.CourseDTO;
 import com.lyy.pojo.entity.Course;
+import com.lyy.pojo.entity.extend.CourseExtend;
 import com.lyy.service.CourseService;
 import com.lyy.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,14 +126,25 @@ public class CourseServiceImpl implements CourseService {
     public CourseDTO queryByTeacher(CourseDTO courseDTO) throws BussinessException {
         PageHelper.startPage(courseDTO.getCurrentPage(), courseDTO.getSize());
         try {
-            List<Course> course = courseDao.queryByTeacher(courseDTO.getTeacher());
-            PageInfo<Course> pageInfo = new PageInfo<>(course);
+            List<CourseExtend> course = courseDao.queryByTeacher(courseDTO.getTeacher());
+            PageInfo<CourseExtend> pageInfo = new PageInfo<>(course);
             courseDTO.setPageInfo(pageInfo);
             return courseDTO;
         } catch (Exception e) {
             e.printStackTrace();
             throw new BussinessException(ErrorCode.SERVICE_COURSE_QUERY_FAIL_ERROR, "查找课程信息失败");
         }
+    }
+
+    /**
+     * 按照教师查找所有已经审核通过的课程信息
+     * @param courseDTO
+     * @return
+     * @throws BussinessException
+     */
+    @Override
+    public List<CourseExtend> queryAllPassByTeacher(CourseDTO courseDTO) throws BussinessException {
+        return courseDao.queryAllPassByTeacher(courseDTO.getTeacher());
     }
 
     /**

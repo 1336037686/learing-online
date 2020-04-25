@@ -10,6 +10,8 @@ import com.lyy.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 课程章节业务层
  * @author LGX_TvT
@@ -37,7 +39,7 @@ public class SectionServiceImpl implements SectionService {
             int result = sectionDao.save(section);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new BussinessException(ErrorCode.SERVICE_SECTION_SAVE_FAIL_ERROR, "专业信息保存失败");
+            throw new BussinessException(ErrorCode.SERVICE_SECTION_SAVE_FAIL_ERROR, "章节信息保存失败");
         }
         return true;
     }
@@ -55,7 +57,7 @@ public class SectionServiceImpl implements SectionService {
             int result = sectionDao.update(section);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new BussinessException(ErrorCode.SERVICE_SECTION_UPDATE_FAIL_ERROR, "专业信息更新失败");
+            throw new BussinessException(ErrorCode.SERVICE_SECTION_UPDATE_FAIL_ERROR, "章节信息更新失败");
         }
         return true;
     }
@@ -72,8 +74,23 @@ public class SectionServiceImpl implements SectionService {
             int result = sectionDao.remove(sectionDTO.getId());
         } catch (Exception e) {
             e.printStackTrace();
-            throw new BussinessException(ErrorCode.SERVICE_SECTION_DELETE_FAIL_ERROR, "专业信息删除失败");
+            throw new BussinessException(ErrorCode.SERVICE_SECTION_DELETE_FAIL_ERROR, "章节信息删除失败");
         }
         return true;
+    }
+
+    /**
+     * 按照课程ID查询章节
+     * @param sectionDTO
+     * @return
+     */
+    @Override
+    public List<Section> queryAllByCourse(SectionDTO sectionDTO) throws BussinessException{
+        try {
+            return sectionDao.queryAllByCourse(sectionDTO.getCourse());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_SECTION_DELETE_FAIL_ERROR, "章节信息查找失败");
+        }
     }
 }

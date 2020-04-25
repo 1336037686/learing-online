@@ -8,6 +8,7 @@ import com.lyy.exception.base.AppException;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.SectionDTO;
+import com.lyy.pojo.entity.Section;
 import com.lyy.pojo.vo.SectionQueryVO;
 import com.lyy.service.SectionService;
 import com.lyy.utils.ConverterUtil;
@@ -17,6 +18,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * 课程章节控制层
@@ -113,8 +116,26 @@ public class SectionController {
     }
 
     // TODO: 按照课程ID查询章节
+    @TokenVerify(required = false)
+    @ApiOperation(value = "按照课程ID查询章节", notes = "课程ID")
+    @ApiILog
+    @GetMapping("/query/course/{id}")
+    public CommonResponse<List<Section>> doQueryAllByCourse(@PathVariable("id") String courseId) {
+        List<Section> list = null;
+        try {
+            SectionDTO sectionDTO = new SectionDTO();
+            sectionDTO.setCourse(courseId);
+            list = sectionService.queryAllByCourse(sectionDTO);
+        } catch (BussinessException b) {
+            b.printStackTrace();
+            throw new AppException(b.getCode(), b.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ErrorCode.SERVICE_SECTION_DELETE_FAIL_ERROR, "课程章节信息查找失败");
+        }
+        return new CommonResponse<List<Section>>(new ResponseHead(StateCode.SUCCEED_CODE, "课程章节信息查找成功"), new ResponseBody<List<Section>>(list));
+    }
 
-    // TODO：按照课程ID与关键字查询章节
 
 
 

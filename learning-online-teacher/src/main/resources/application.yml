@@ -1,6 +1,11 @@
 spring:
   application:
     name: learning-online-admin
+  # 上传文件设置
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
   datasource:
     name: dataSource1                                                             #如果存在多个数据源，监控的时候可以通过名字来区分开来。如果没有配置，将会生成一个名字，格式是："DataSource-" + System.identityHashCode(this)
     type: com.alibaba.druid.pool.DruidDataSource
@@ -39,6 +44,8 @@ spring:
 #        max-idle: 10                                                               # 最大空闲连接
 #        min-idle: 0                                                                # 最小空闲连接
 #    timeout: 1000                                                                  # 连接超时时间
+
+
 
 # Mybatis配置
 mybatis:
