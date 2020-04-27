@@ -271,5 +271,25 @@ public final class ErrorCode {
      */
     public static final String SERVICE_VIDEO_QUERY_FAIL_ERROR = "222004";
 
+    // ################# 章节资源信息管理模块 #################
+    /**
+     * 课程章节资源信息保存错误
+     */
+    public static final String SERVICE_RESOURCE_SAVE_FAIL_ERROR = "223001";
+
+    /**
+     * 课程章节资源信息删除错误
+     */
+    public static final String SERVICE_RESOURCE_DELETE_FAIL_ERROR = "223002";
+
+    /**
+     * 课程章节资源信息更新错误
+     */
+    public static final String SERVICE_RESOURCE_UPDATE_FAIL_ERROR = "223003";
+
+    /**
+     * 课程章节资源信息查询错误
+     */
+    public static final String SERVICE_RESOURCE_QUERY_FAIL_ERROR = "223004";
 
 }
