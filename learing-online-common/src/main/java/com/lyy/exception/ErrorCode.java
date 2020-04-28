@@ -292,4 +292,89 @@ public final class ErrorCode {
      */
     public static final String SERVICE_RESOURCE_QUERY_FAIL_ERROR = "223004";
 
+    // ################# 教师公告信息管理模块 #################
+    /**
+     * 公告信息保存错误
+     */
+    public static final String SERVICE_ANNOUNCEMENT_SAVE_FAIL_ERROR = "224001";
+
+    /**
+     * 公告信息删除错误
+     */
+    public static final String SERVICE_ANNOUNCEMENT_DELETE_FAIL_ERROR = "224002";
+
+    /**
+     * 公告更新错误
+     */
+    public static final String SERVICE_ANNOUNCEMENT_UPDATE_FAIL_ERROR = "224003";
+
+    /**
+     * 公告查询错误
+     */
+    public static final String SERVICE_ANNOUNCEMENT_QUERY_FAIL_ERROR = "224004";
+
+    // ################# 课程反馈信息管理模块 #################
+    /**
+     * 课程反馈信息保存错误
+     */
+    public static final String SERVICE_FEEDBACK_SAVE_FAIL_ERROR = "224001";
+
+    /**
+     * 课程反馈信息删除错误
+     */
+    public static final String SERVICE_FEEDBACK_DELETE_FAIL_ERROR = "224002";
+
+    /**
+     * 课程反馈更新错误
+     */
+    public static final String SERVICE_FEEDBACK_UPDATE_FAIL_ERROR = "224003";
+
+    /**
+     * 课程反馈查询错误
+     */
+    public static final String SERVICE_FEEDBACK_QUERY_FAIL_ERROR = "224004";
+
+    // ################# 学生选课管理信息管理模块 #################
+    /**
+     * 学生选课管理信息保存错误
+     */
+    public static final String SERVICE_STUDENT_COURSE_SAVE_FAIL_ERROR = "224001";
+
+    /**
+     * 学生选课管理信息删除错误
+     */
+    public static final String SERVICE_STUDENT_COURSE_DELETE_FAIL_ERROR = "224002";
+
+    /**
+     * 学生选课管理信息更新错误
+     */
+    public static final String SERVICE_STUDENT_COURSE_UPDATE_FAIL_ERROR = "224003";
+
+    /**
+     * 学生选课管理信息查询错误
+     */
+    public static final String SERVICE_STUDENT_COURSE_QUERY_FAIL_ERROR = "224004";
+
+    // ################# 签到管理信息管理模块 #################
+    /**
+     * 签到管理信息保存错误
+     */
+    public static final String SERVICE_ATTENDANCE_SAVE_FAIL_ERROR = "224001";
+
+    /**
+     * 签到管理信息删除错误
+     */
+    public static final String SERVICE_ATTENDANCE_DELETE_FAIL_ERROR = "224002";
+
+    /**
+     * 签到管理信息更新错误
+     */
+    public static final String SERVICE_ATTENDANCE_UPDATE_FAIL_ERROR = "224003";
+
+    /**
+     * 签到管理信息查询错误
+     */
+    public static final String SERVICE_ATTENDANCE_QUERY_FAIL_ERROR = "224004";
+
+
 }

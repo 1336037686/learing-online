@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+ @AllArgsConstructor
 public class StudentDTO {
 
     /**

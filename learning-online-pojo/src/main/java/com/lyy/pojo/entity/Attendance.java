@@ -4,21 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 教师公告
- * (Announcement)实体类
- *
- * @author makejava
- * @since 2020-03-23 21:02:06
+ * 考勤表
+ * @author LGX_TvT
+ * @date 2020-04-29 3:18
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Announcement implements Serializable {
-    private static final long serialVersionUID = 808588092642996019L;
+public class Attendance {
 
     /**
      * id
@@ -31,14 +27,14 @@ public class Announcement implements Serializable {
     private String course;
 
     /**
-     * 内容
+     * 开始时间
      */
-    private String content;
+    private Date startTime;
 
     /**
-     * 发布时间
+     * 结束时间
      */
-    private Date time;
+    private Date endTime;
 
     /**
      * 状态

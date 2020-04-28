@@ -1,23 +1,26 @@
 package com.lyy;
 
-import com.lyy.utils.cdn.CdnUtil;
+import com.lyy.pojo.dto.StudentDTO;
+import com.lyy.service.StudentService;
+import com.lyy.utils.SnowFlakeUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.io.File;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 class LearningOnlineTeacherApplicationTests {
 
     @Autowired
-    private CdnUtil cdnUtil;
-
+    StudentService studentService;
 
     @Test
+    @Transactional
     void contextLoads() {
-        String s = cdnUtil.uploadVideo(new File("C:\\Users\\LGX\\Desktop\\20200110_104506.mp4"));
-        System.out.println(s);
+        StudentDTO studentDTO = new StudentDTO();
+        studentDTO.setId(SnowFlakeUtil.generateId() + "");
+        studentDTO.setName("赵六");
+        studentService.save(studentDTO);
     }
 
 }

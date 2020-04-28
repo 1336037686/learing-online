@@ -4,21 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 教师公告
- * (Announcement)实体类
- *
- * @author makejava
- * @since 2020-03-23 21:02:06
+ * @author LGX_TvT
+ * @date 2020-04-29 0:31
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Announcement implements Serializable {
-    private static final long serialVersionUID = 808588092642996019L;
+public class StudentCourse {
 
     /**
      * id
@@ -31,14 +26,19 @@ public class Announcement implements Serializable {
     private String course;
 
     /**
-     * 内容
+     * 学生
      */
-    private String content;
+    private String student;
 
     /**
-     * 发布时间
+     * 时间
      */
     private Date time;
+
+    /**
+     * 审核状态
+     */
+    private String checkState;
 
     /**
      * 状态

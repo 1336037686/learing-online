@@ -1,4 +1,4 @@
-package com.lyy.pojo.entity;
+package com.lyy.pojo.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Announcement implements Serializable {
+public class AnnouncementQueryVO implements Serializable {
     private static final long serialVersionUID = 808588092642996019L;
 
     /**
@@ -39,10 +39,5 @@ public class Announcement implements Serializable {
      * 发布时间
      */
     private Date time;
-
-    /**
-     * 状态
-     */
-    private String state;
 
 }

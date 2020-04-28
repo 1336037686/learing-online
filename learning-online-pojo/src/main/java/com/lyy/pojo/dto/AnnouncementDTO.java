@@ -1,4 +1,4 @@
-package com.lyy.pojo.entity;
+package com.lyy.pojo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Announcement implements Serializable {
+public class AnnouncementDTO implements Serializable {
     private static final long serialVersionUID = 808588092642996019L;
 
     /**

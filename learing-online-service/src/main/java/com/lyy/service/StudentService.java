@@ -14,7 +14,7 @@ public interface StudentService {
      * @param specialtyDTO
      * @return
      */
-    boolean save(StudentDTO specialtyDTO);
+    public boolean save(StudentDTO specialtyDTO);
 
     /**
      * 查找专业信息

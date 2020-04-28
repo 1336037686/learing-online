@@ -9,6 +9,7 @@ import com.lyy.service.StudentService;
 import com.lyy.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * @author LGX_TvT
  * @date 2020-03-31 22:04
  */
+@Transactional
 @Service
 public class StudentServiceImpl implements StudentService {
 
