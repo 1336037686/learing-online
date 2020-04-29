@@ -2,6 +2,9 @@ package com.lyy.service;
 
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.StudentCourseDTO;
+import com.lyy.pojo.entity.extend.StudentCourseExtend;
+
+import java.util.List;
 
 /**
  * @author LGX_TvT
@@ -15,5 +18,5 @@ public interface StudentCourseService {
 
     boolean update(StudentCourseDTO studentCourseDTO) throws BussinessException;
 
-    StudentCourseDTO queryAllByCourse(StudentCourseDTO studentCourseDTO) throws BussinessException;
+    List<StudentCourseExtend> queryAllByCourse(StudentCourseDTO studentCourseDTO) throws BussinessException;
 }

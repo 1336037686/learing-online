@@ -1,4 +1,4 @@
-package com.lyy.pojo.vo;
+package com.lyy.pojo.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 /**
- * 考勤表
+ * 作业
  * @author LGX_TvT
- * @date 2020-04-29 3:18
+ * @date 2020-04-29 13:56
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AttendanceQueryVO {
+public class CourseJobDTO {
 
     /**
      * id
@@ -27,7 +27,22 @@ public class AttendanceQueryVO {
     private String course;
 
     /**
-     * 开始时间
+     * 标题
+     */
+    private String title;
+
+    /**
+     * 内容
+     */
+    private String content;
+
+    /**
+     * 附件
+     */
+    private String resource;
+
+    /**
+     * 起始时间
      */
     private Date startTime;
 
@@ -37,7 +52,10 @@ public class AttendanceQueryVO {
     private Date endTime;
 
     /**
-     * 签到时长
+     * 状态
      */
-    private Integer date;
+    private String state;
+
+
+
 }

@@ -2,7 +2,9 @@ package com.lyy.service;
 
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.AttendanceDTO;
+import com.lyy.pojo.entity.Attendance;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,7 +34,7 @@ public interface AttendanceService {
      * @return
      * @throws BussinessException
      */
-    AttendanceDTO queryAllByCourse(AttendanceDTO attendanceDTO) throws BussinessException;
+    List<Attendance> queryAllByCourse(AttendanceDTO attendanceDTO) throws BussinessException;
 
     /**
      * 根据签到ID查看签到基本信息

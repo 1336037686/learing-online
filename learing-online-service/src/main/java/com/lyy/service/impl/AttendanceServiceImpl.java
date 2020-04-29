@@ -1,7 +1,5 @@
 package com.lyy.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.lyy.dao.AttendanceDao;
 import com.lyy.dao.StudentAttendanceDao;
 import com.lyy.exception.ErrorCode;
@@ -58,13 +56,9 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public AttendanceDTO queryAllByCourse(AttendanceDTO attendanceDTO) throws BussinessException {
-        PageHelper.startPage(attendanceDTO.getCurrentPage(), attendanceDTO.getSize());
+    public List<Attendance> queryAllByCourse(AttendanceDTO attendanceDTO) throws BussinessException {
         try {
-            List<Attendance> list = attendanceDao.queryAllByCourse(attendanceDTO.getCourse());
-            PageInfo<Attendance> pageInfo = new PageInfo<>(list);
-            attendanceDTO.setPageInfo(pageInfo);
-            return attendanceDTO;
+            return attendanceDao.queryAllByCourse(attendanceDTO.getCourse());
         } catch (Exception e) {
             e.printStackTrace();
             throw new BussinessException(ErrorCode.SERVICE_ATTENDANCE_QUERY_FAIL_ERROR, "签到信息查找失败");

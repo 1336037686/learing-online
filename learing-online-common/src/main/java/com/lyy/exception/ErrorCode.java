@@ -376,5 +376,46 @@ public final class ErrorCode {
      */
     public static final String SERVICE_ATTENDANCE_QUERY_FAIL_ERROR = "224004";
 
+    // ################# 作业管理信息管理模块 #################
+    /**
+     * 作业管理信息保存错误
+     */
+    public static final String SERVICE_JOB_SAVE_FAIL_ERROR = "224001";
+
+    /**
+     * 作业管理信息删除错误
+     */
+    public static final String SERVICE_JOB_DELETE_FAIL_ERROR = "224002";
+
+    /**
+     * 作业管理信息更新错误
+     */
+    public static final String SERVICE_JOB_UPDATE_FAIL_ERROR = "224003";
+
+    /**
+     * 作业管理信息查询错误
+     */
+    public static final String SERVICE_JOB_QUERY_FAIL_ERROR = "224004";
+
+    // ################# 考试管理信息管理模块 #################
+    /**
+     * 考试管理信息保存错误
+     */
+    public static final String SERVICE_EXAM_SAVE_FAIL_ERROR = "224001";
+
+    /**
+     * 考试管理信息删除错误
+     */
+    public static final String SERVICE_EXAM_DELETE_FAIL_ERROR = "224002";
+
+    /**
+     * 考试管理信息更新错误
+     */
+    public static final String SERVICE_EXAM_UPDATE_FAIL_ERROR = "224003";
+
+    /**
+     * 考试管理信息查询错误
+     */
+    public static final String SERVICE_EXAM_QUERY_FAIL_ERROR = "224004";
 
 }

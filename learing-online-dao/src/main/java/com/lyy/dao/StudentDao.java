@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Update;
 import java.util.List;
 
 /**
- * 院系Dao
+ * 学生Dao
  * @author LGX_TvT
  * @date 2020-03-24 0:55
  */
@@ -17,7 +17,7 @@ import java.util.List;
 public interface StudentDao {
 
     /**
-     * 保存专业
+     * 保存学生
      * @param student
      * @return
      */
@@ -25,14 +25,14 @@ public interface StudentDao {
     int save(Student student);
 
     /**
-     * 查询所有专业
+     * 查询所有学生
      * @return
      */
     @Select("select * from student where state = 0")
     List<Student> queryAll();
 
     /**
-     * 按照id查找专业
+     * 按照id查找学生
      * @param id
      * @return
      */
@@ -40,7 +40,15 @@ public interface StudentDao {
     Student queryById(String id);
 
     /**
-     * 更新专业
+     * 按照学号查找学生
+     * @param userName
+     * @return
+     */
+    @Select("select * from student where state = 0 and username = #{userName}")
+    Student queryByUserName(String userName);
+
+    /**
+     * 更新学生
      * @param student
      * @return
      */
@@ -48,7 +56,7 @@ public interface StudentDao {
     int update(Student student);
 
     /**
-     * 删除专业
+     * 删除学生
      * @param id
      * @return
      */

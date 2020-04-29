@@ -1,11 +1,11 @@
 package com.lyy.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.lyy.dao.StudentCourseDao;
+import com.lyy.dao.StudentDao;
 import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.StudentCourseDTO;
+import com.lyy.pojo.entity.Student;
 import com.lyy.pojo.entity.StudentCourse;
 import com.lyy.pojo.entity.extend.StudentCourseExtend;
 import com.lyy.service.StudentCourseService;
@@ -26,12 +26,20 @@ public class StudentCourseServiceImpl implements StudentCourseService {
     private StudentCourseDao studentCourseDao;
 
     @Autowired
+    private StudentDao studentDao;
+
+    @Autowired
     private ConverterUtil converterUtil;
 
     @Override
     public boolean save(StudentCourseDTO studentCourseDTO) throws BussinessException {
+        Student student = studentDao.queryByUserName(studentCourseDTO.getStudent());
+        if(student == null) {
+            throw new BussinessException(ErrorCode.SERVICE_STUDENT_COURSE_SAVE_FAIL_ERROR, "该学生学号不存在");
+        }
         try {
             StudentCourse studentCourse = converterUtil.copyPropertiesAndReturnNewOne(studentCourseDTO, StudentCourse.class);
+            studentCourse.setStudent(student.getId());
             int result = studentCourseDao.save(studentCourse);
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,13 +72,10 @@ public class StudentCourseServiceImpl implements StudentCourseService {
     }
 
     @Override
-    public StudentCourseDTO queryAllByCourse(StudentCourseDTO studentCourseDTO) throws BussinessException {
-        PageHelper.startPage(studentCourseDTO.getCurrentPage(), studentCourseDTO.getSize());
+    public List<StudentCourseExtend> queryAllByCourse(StudentCourseDTO studentCourseDTO) throws BussinessException {
         try {
             List<StudentCourseExtend> list = studentCourseDao.queryAllByCourse(studentCourseDTO.getCourse());
-            PageInfo<StudentCourseExtend> pageInfo = new PageInfo<>(list);
-            studentCourseDTO.setPageInfo(pageInfo);
-            return studentCourseDTO;
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
             throw new BussinessException(ErrorCode.SERVICE_STUDENT_COURSE_QUERY_FAIL_ERROR, "选课信息查找失败");

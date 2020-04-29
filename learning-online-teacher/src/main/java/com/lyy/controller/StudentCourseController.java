@@ -8,8 +8,8 @@ import com.lyy.exception.base.AppException;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.StudentCourseDTO;
+import com.lyy.pojo.entity.extend.StudentCourseExtend;
 import com.lyy.pojo.vo.StudentCourseQueryVO;
-import com.lyy.pojo.vo.StudentCourseResponseVO;
 import com.lyy.service.StudentCourseService;
 import com.lyy.utils.ConverterUtil;
 import com.lyy.utils.SnowFlakeUtil;
@@ -18,6 +18,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 学生选课控制层
@@ -46,6 +50,7 @@ public class StudentCourseController {
         try {
             StudentCourseDTO studentCourseDTO = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), StudentCourseDTO.class);
             studentCourseDTO.setId(SnowFlakeUtil.generateId() + "");
+            studentCourseDTO.setTime(new Date());
             studentCourseDTO.setState("0");
             boolean result = studentCourseService.save(studentCourseDTO);
         } catch (BussinessException b) {
@@ -107,20 +112,42 @@ public class StudentCourseController {
     }
 
     /**
-     * 根据课程ID查看选课学生
-     * @param vo
+     * 根据课程ID和类型查看选课学生
+     * @param courseId
      * @return
      */
     @TokenVerify(required = false)
-    @ApiOperation(value = "根据课程ID查看选课学生", notes = "课程ID")
+    @ApiOperation(value = "根据课程ID和类型查看选课学生", notes = "课程ID")
     @ApiILog
-    @PostMapping("/query/course")
-    public CommonResponse<StudentCourseResponseVO> doQueryAllByCourse(@RequestBody CommonRequest<StudentCourseQueryVO> vo) {
-        StudentCourseResponseVO studentCourseResponseVO = null;
+    @GetMapping("/query/course/{courseId}/{type}")
+    public CommonResponse<List<StudentCourseExtend>> doQueryAllByCourse(@PathVariable("courseId") String courseId, @PathVariable("type") String type) {
+        List<StudentCourseExtend> studentCourseResponseVO = new ArrayList<>();
         try {
-            StudentCourseDTO studentCourseDTO = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), StudentCourseDTO.class);
-            studentCourseDTO = studentCourseService.queryAllByCourse(studentCourseDTO);
-            studentCourseResponseVO = converterUtil.copyPropertiesAndReturnNewOne(studentCourseDTO, StudentCourseResponseVO.class);
+            StudentCourseDTO studentCourseDTO = new StudentCourseDTO();
+            studentCourseDTO.setCourse(courseId);
+            List<StudentCourseExtend> list = studentCourseService.queryAllByCourse(studentCourseDTO);
+            List<StudentCourseExtend> passList = new ArrayList<>();
+            List<StudentCourseExtend> failList = new ArrayList<>();
+            for (StudentCourseExtend x : list) {
+                if("1".equals(x.getCheckState())) {
+                    passList.add(x);
+                } else {
+                    failList.add(x);
+                }
+            }
+            switch (type) {
+                case "0":
+                    // 查询未通过
+                    studentCourseResponseVO = failList;
+                    break;
+                case "1":
+                    // 查询已通过
+                    studentCourseResponseVO = passList;
+                    break;
+                default:
+                    // 查询所有
+                    studentCourseResponseVO = list;
+            }
         } catch (BussinessException b) {
             b.printStackTrace();
             throw new AppException(b.getCode(), b.getMessage());
@@ -128,7 +155,7 @@ public class StudentCourseController {
             e.printStackTrace();
             throw new AppException(ErrorCode.SERVICE_STUDENT_COURSE_QUERY_FAIL_ERROR, "选课信息查找失败");
         }
-        return new CommonResponse<StudentCourseResponseVO>(new ResponseHead(StateCode.SUCCEED_CODE, "选课信息查找成功"), new ResponseBody<>(studentCourseResponseVO));
+        return new CommonResponse<List<StudentCourseExtend>>(new ResponseHead(StateCode.SUCCEED_CODE, "选课信息查找成功"), new ResponseBody<>(studentCourseResponseVO));
     }
 
 
