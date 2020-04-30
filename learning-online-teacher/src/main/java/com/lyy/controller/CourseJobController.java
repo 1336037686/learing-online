@@ -121,7 +121,7 @@ public class CourseJobController {
     @TokenVerify(required = false)
     @ApiOperation(value = "根据课程查找所有作业", notes = "课程ID")
     @ApiILog
-    @PostMapping("/query/course/{courseId}")
+    @GetMapping("/query/course/{courseId}")
     public CommonResponse<List<CourseJob>> doQueryAllByCourse(@PathVariable("courseId") String courseId) {
         List<CourseJob> courseJobs = null;
         try {
@@ -137,7 +137,7 @@ public class CourseJobController {
     }
 
     /**
-     * 根据课程ID查找上交的作业
+     * 根据作业ID查找上交的作业
      * @param courseId
      * @return
      */

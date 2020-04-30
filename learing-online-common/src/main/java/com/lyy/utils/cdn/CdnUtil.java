@@ -177,7 +177,7 @@ public class CdnUtil {
             metadata.setContentEncoding("utf-8");
             //文件的MIME，定义文件的类型及网页编码，决定浏览器将以什么形式、什么编码读取文件。如果用户没有指定则根据Key或文件名的扩展名生成，
             //如果没有扩展名则填默认值application/octet-stream
-            // metadata.setContentType(getContentType(fileName));
+             metadata.setContentType(getContentType(fileName));
             //指定该Object被下载时的名称（指示MINME用户代理如何显示附加的文件，打开或下载，及文件名称）
             metadata.setContentDisposition("filename/filesize=" + fileName + "/" + fileSize + "Byte.");
             //上传文件   (上传文件流的形式)
@@ -278,12 +278,16 @@ public class CdnUtil {
         if(".doc".equalsIgnoreCase(fileExtension) || "docx".equalsIgnoreCase(fileExtension)) {
             return "application/msword";
         }
+        if(".xls".equalsIgnoreCase(fileExtension) || ".xlt".equalsIgnoreCase(fileExtension) || ".xla".equalsIgnoreCase(fileExtension)) {
+            return "application/octet-stream";
+        }
+        if(".mp4".equalsIgnoreCase(fileExtension)) {
+            return "video/mpeg4";
+        }
         if(".xml".equalsIgnoreCase(fileExtension)) {
             return "text/xml";
         }
         //默认返回类型
-        return "image/jpg";
+        return "application/octet-stream";
     }
-
-
 }

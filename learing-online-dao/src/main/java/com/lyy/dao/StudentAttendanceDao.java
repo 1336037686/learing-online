@@ -14,8 +14,6 @@ import java.util.List;
 public interface StudentAttendanceDao {
 
 
-    @Select("select student.username,student.name " +
-            "from student_course,student " +
-            "where student.`id` = student_course.`student` and student_course.`state` = 0 and student_course.`check_state` = 1 and student_course.`student` not in (SELECT student_attendance.`student` FROM student_attendance,attendance WHERE student_attendance.state = 0 AND student_attendance.`attendance` = attendance.`id` AND student_attendance.`attendance` = #{attendanceId})")
+    @Select("SELECT student.username, student.name FROM student_course,student WHERE student_course.`check_state` = '1' AND student_course.`state` = '0' AND student_course.`student` = student.`id` AND student_course.`course` = (SELECT course FROM attendance WHERE id = #{attendanceId} AND state = '0') AND student.`id` NOT IN (SELECT student_attendance.`student` FROM student_attendance WHERE student_attendance.`state` = '0' AND student_attendance.`attendance` = #{attendanceId})")
     List<Student> queryInfo(String attendanceId);
 }

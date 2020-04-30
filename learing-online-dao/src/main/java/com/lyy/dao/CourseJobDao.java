@@ -22,6 +22,6 @@ public interface CourseJobDao {
     @UpdateProvider(type = CourseJobProvider.class, method = "update")
     int update(CourseJob courseJob);
 
-    @Select("select * from course_job where state = 0 and course = #{courseId}")
+    @Select("select * from course_job where state = 0 and course = #{courseId} order by start_time desc")
     List<CourseJob> queryAllByCourse(String courseId);
 }
