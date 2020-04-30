@@ -8,11 +8,13 @@ import com.lyy.exception.base.AppException;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.CourseJobDTO;
+import com.lyy.pojo.dto.StudentJobDTO;
 import com.lyy.pojo.entity.CourseJob;
 import com.lyy.pojo.entity.StudentJob;
 import com.lyy.pojo.entity.extend.StudentJobExtend;
 import com.lyy.pojo.vo.CourseJobQueryVO;
 import com.lyy.service.CourseJobService;
+import com.lyy.service.StudentJobService;
 import com.lyy.utils.ConverterUtil;
 import com.lyy.utils.SnowFlakeUtil;
 import io.swagger.annotations.Api;
@@ -36,6 +38,9 @@ public class CourseJobController {
 
     @Autowired
     private CourseJobService courseJobService;
+
+    @Autowired
+    private StudentJobService studentJobService;
 
     @Autowired
     private ConverterUtil converterUtil;
@@ -138,17 +143,17 @@ public class CourseJobController {
 
     /**
      * 根据作业ID查找上交的作业
-     * @param courseId
+     * @param courseJobId
      * @return
      */
     @TokenVerify(required = false)
     @ApiOperation(value = "根据作业ID查找上交的作业", notes = "课程ID")
     @ApiILog
-    @PostMapping("/query/studentJob/{courseId}")
-    public CommonResponse<List<StudentJobExtend>> doQueryStudentJobByJobId(@PathVariable("courseId") String courseId) {
+    @GetMapping("/query/studentJob/{courseJobId}")
+    public CommonResponse<List<StudentJobExtend>> doQueryStudentJobByJobId(@PathVariable("courseJobId") String courseJobId) {
         List<StudentJobExtend> studentJobExtends = null;
         try {
-            studentJobExtends = courseJobService.queryStudentJobByJobId(courseId);
+            studentJobExtends = courseJobService.queryStudentJobByJobId(courseJobId);
         } catch (BussinessException b) {
             b.printStackTrace();
             throw new AppException(b.getCode(), b.getMessage());
@@ -167,7 +172,7 @@ public class CourseJobController {
     @TokenVerify(required = false)
     @ApiOperation(value = "根据作业ID查找作业未上交的信息", notes = "作业ID")
     @ApiILog
-    @PostMapping("/query/studentJob/{courseId}/{jobId}")
+    @GetMapping("/query/studentJob/{courseId}/{jobId}")
     public CommonResponse<Map> doQueryMissStudentJobByJobId(@PathVariable("courseId") String courseId, @PathVariable("jobId") String jobId) {
         Map<String, Object> map = null;
         try {
@@ -186,11 +191,21 @@ public class CourseJobController {
      * 作业批改
      */
     @TokenVerify(required = false)
-    @ApiOperation(value = "根据课程ID查找作业未上交的信息", notes = "课程ID")
+    @ApiOperation(value = "修改学生作业", notes = "学生作业信息")
     @ApiILog
-    @PostMapping("/update/studentJob")
-    public CommonResponse<String> doUpdateStudentJob(CommonRequest<StudentJob> vo) {
-        return null;
+    @PutMapping("/update/studentJob")
+    public CommonResponse<String> doUpdateStudentJob(@RequestBody CommonRequest<StudentJob> vo) {
+        try {
+            StudentJobDTO studentJobDTO = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), StudentJobDTO.class);
+            boolean result = studentJobService.update(studentJobDTO);
+        } catch (BussinessException b) {
+            b.printStackTrace();
+            throw new AppException(b.getCode(), b.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ErrorCode.SERVICE_JOB_UPDATE_FAIL_ERROR, "作业信息修改失败");
+        }
+        return new CommonResponse<String>(new ResponseHead(StateCode.SUCCEED_CODE, "作业信息修改成功"), new ResponseBody<String>("作业信息修改成功"));
     }
 
 }
