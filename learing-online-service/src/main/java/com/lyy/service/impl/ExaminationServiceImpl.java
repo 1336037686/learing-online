@@ -1,16 +1,20 @@
 package com.lyy.service.impl;
 
 import com.lyy.dao.ExaminationDao;
+import com.lyy.dao.StudentExaminationDao;
 import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.ExaminationDTO;
 import com.lyy.pojo.entity.Examination;
+import com.lyy.pojo.entity.extend.StudentExaminationExtend;
 import com.lyy.service.ExaminationService;
 import com.lyy.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author LGX_TvT
@@ -21,6 +25,9 @@ public class ExaminationServiceImpl implements ExaminationService {
 
     @Autowired
     private ExaminationDao examinationDao;
+
+    @Autowired
+    private StudentExaminationDao studentExaminationDao;
 
     @Autowired
     private ConverterUtil converterUtil;
@@ -69,5 +76,28 @@ public class ExaminationServiceImpl implements ExaminationService {
             throw new BussinessException(ErrorCode.SERVICE_EXAM_QUERY_FAIL_ERROR, "考试信息查找失败");
         }
     }
-    
+
+    @Override
+    public List<StudentExaminationExtend> queryStudentExaminationByExamId(String examId) throws BussinessException {
+        try {
+            return studentExaminationDao.queryStudentExamByExamId(examId);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_EXAM_QUERY_FAIL_ERROR, "试卷信息查找失败");
+        }
+    }
+
+    @Override
+    public Map<String, Object> queryMissStudentExaminationByCourseAndExam(String courseId, String examId) throws BussinessException {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<StudentExaminationExtend> list = studentExaminationDao.queryMissStudentExamByCourseAndExam(courseId, examId);
+            map.put("miss", list);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_EXAM_QUERY_FAIL_ERROR, "试卷信息查找失败");
+        }
+    }
+
 }

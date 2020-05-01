@@ -8,9 +8,13 @@ import com.lyy.exception.base.AppException;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.ExaminationDTO;
+import com.lyy.pojo.dto.StudentExaminationDTO;
 import com.lyy.pojo.entity.Examination;
+import com.lyy.pojo.entity.StudentExamination;
+import com.lyy.pojo.entity.extend.StudentExaminationExtend;
 import com.lyy.pojo.vo.ExaminationQueryVO;
 import com.lyy.service.ExaminationService;
+import com.lyy.service.StudentExaminationService;
 import com.lyy.utils.ConverterUtil;
 import com.lyy.utils.SnowFlakeUtil;
 import io.swagger.annotations.Api;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 考卷管理控制层
@@ -33,6 +38,9 @@ public class ExaminationController {
 
     @Autowired
     private ExaminationService examinationService;
+
+    @Autowired
+    private StudentExaminationService studentExaminationService;
 
     @Autowired
     private ConverterUtil converterUtil;
@@ -132,6 +140,73 @@ public class ExaminationController {
         }
         return new CommonResponse<List<Examination>>(new ResponseHead(StateCode.SUCCEED_CODE, "考卷信息查找成功"), new ResponseBody<>(courseJobs));
     }
-    
+
+    /**
+     * 根据试卷ID查找上交的试卷
+     * @param examId
+     * @return
+     */
+    @TokenVerify(required = false)
+    @ApiOperation(value = "根据试卷ID查找上交的试卷", notes = "试卷ID")
+    @ApiILog
+    @GetMapping("/query/studentExamination/{examId}")
+    public CommonResponse<List<StudentExaminationExtend>> doQueryStudentExaminationByExamId(@PathVariable("examId") String examId) {
+        List<StudentExaminationExtend> studentExaminationExtends = null;
+        try {
+            studentExaminationExtends = examinationService.queryStudentExaminationByExamId(examId);
+        } catch (BussinessException b) {
+            b.printStackTrace();
+            throw new AppException(b.getCode(), b.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ErrorCode.SERVICE_EXAM_QUERY_FAIL_ERROR, "试卷信息查找失败");
+        }
+        return new CommonResponse<List<StudentExaminationExtend>>(new ResponseHead(StateCode.SUCCEED_CODE, "试卷信息查找成功"), new ResponseBody<>(studentExaminationExtends));
+    }
+
+    /**
+     * 查找未上交
+     * @param courseId
+     * @return
+     */
+    @TokenVerify(required = false)
+    @ApiOperation(value = "根据试卷ID以及课程ID查找试卷未上交的信息", notes = "试卷ID，课程ID")
+    @ApiILog
+    @GetMapping("/query/studentExamination/{courseId}/{examId}")
+    public CommonResponse<Map> doQueryMissStudentExaminationByCourseAndExaminationId(@PathVariable("courseId") String courseId, @PathVariable("examId") String examId) {
+        Map<String, Object> map = null;
+        try {
+            map = examinationService.queryMissStudentExaminationByCourseAndExam(courseId, examId);
+        } catch (BussinessException b) {
+            b.printStackTrace();
+            throw new AppException(b.getCode(), b.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ErrorCode.SERVICE_EXAM_QUERY_FAIL_ERROR, "试卷信息查找失败");
+        }
+        return new CommonResponse<Map>(new ResponseHead(StateCode.SUCCEED_CODE, "试卷信息查找成功"), new ResponseBody<>(map));
+    }
+
+    /**
+     * 作业批改
+     */
+    @TokenVerify(required = false)
+    @ApiOperation(value = "修改学生试卷（批改）", notes = "学生作业试卷")
+    @ApiILog
+    @PutMapping("/update/studentExamination")
+    public CommonResponse<String> doUpdateStudentExamination(@RequestBody CommonRequest<StudentExamination> vo) {
+        try {
+            StudentExaminationDTO studentExaminationDTO = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), StudentExaminationDTO.class);
+            boolean result = studentExaminationService.update(studentExaminationDTO);
+        } catch (BussinessException b) {
+            b.printStackTrace();
+            throw new AppException(b.getCode(), b.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ErrorCode.SERVICE_EXAM_UPDATE_FAIL_ERROR, "试卷信息修改失败");
+        }
+        return new CommonResponse<String>(new ResponseHead(StateCode.SUCCEED_CODE, "试卷信息修改成功"), new ResponseBody<String>("试卷信息修改成功"));
+    }
+
 
 }
