@@ -70,6 +70,7 @@
         <module>learing-online-common</module>
         <module>learing-online-admin</module>
         <module>learning-online-teacher</module>
+        <module>learning-online-student</module>
     </modules>
 
     <build>
