@@ -53,6 +53,17 @@ public class CourseResponseVO {
     private String teacher;
 
     /**
+     * 课程类别名称
+     */
+    private String typeName;
+
+    /**
+     * 教师名称
+     */
+    private String teacherName;
+
+
+    /**
      * 审核状态
      */
     private String checkState;

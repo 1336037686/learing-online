@@ -5,6 +5,7 @@ import com.lyy.pojo.dto.ResourceDTO;
 import com.lyy.pojo.entity.Resource;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author LGX_TvT
@@ -32,4 +33,18 @@ public interface ResourceService {
      * @return
      */
     List<Resource> queryAllByCourseAndSection(ResourceDTO resourceDTO) throws BussinessException;
+
+    /**
+     * 查找最新资源
+     * @param num
+     * @return
+     */
+    List<Resource> queryNewest(Integer num);
+
+    /**
+     * 根据课程查找资源列表
+     * @param resourceDTO
+     * @return
+     */
+    Map<String, Object> queryMapByCourse(ResourceDTO resourceDTO);
 }

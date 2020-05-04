@@ -27,14 +27,14 @@ public interface CourseDao {
      * 查询所有
      * @return
      */
-    @Select("select * from course where state = 0")
-    List<Course> queryAll();
+    @Select("SELECT course.*, teacher.name AS 'teacherName', category.category_name AS 'typeName' FROM course,teacher,category WHERE category.id = course.type AND teacher.id = course.teacher AND course.state = 0")
+    List<CourseExtend> queryAll();
 
     /**
      * 查询所有
      * @return
      */
-    @Select("select * from course where state = 0 and checkState = 0")
+    @Select("select * from course where state = 0 and check_state = 0")
     List<Course> queryAllAndNotCheck();
 
 
@@ -43,8 +43,25 @@ public interface CourseDao {
      * @param id
      * @return
      */
-    @Select("select * from course where state = 0 and id = #{id}")
-    Course queryById(String id);
+    @Select("SELECT course.*, teacher.name AS 'teacherName', category.category_name AS 'typeName' FROM course,teacher,category where category.id = course.type AND teacher.id = course.teacher AND course.state = 0 AND course.id = #{id}")
+    CourseExtend queryById(String id);
+
+    /**
+     * 按照type查找相应数量的课程
+     * @param type
+     * @return
+     */
+    @Select("select course.id,course.name,course.cover,course.time,teacher.name as 'teacher' from course,teacher where course.teacher = teacher.id and course.state = '0' and course.check_state = '1' and course.type = #{type} limit #{num}")
+    List<Course> queryByTypeAndNum(String type, Integer num);
+
+
+    /**
+     * 按照type查找
+     * @param type
+     * @return
+     */
+    @Select("select course.id,course.name,course.cover,course.time,teacher.name as 'teacher' from course,teacher where course.teacher = teacher.id and course.state = '0' and course.check_state = '1' and course.type = #{type}")
+    List<Course> queryByType(String type);
 
     /**
      * 按照教师id查找
@@ -56,12 +73,12 @@ public interface CourseDao {
     List<CourseExtend> queryByTeacher(String teacher);
 
     /**
-     * 按照教师id查找
+     * 按照教师id查找所有审核通过
      * @param teacher
      * @return
      */
     @Select("SELECT course.*, teacher.name AS 'teacherName', category.category_name AS 'typeName' FROM course,teacher,category " +
-            "WHERE category.id = course.type AND teacher.id = course.teacher AND course.checkState = 1 AND course.state = 0 AND course.teacher = #{teacher}")
+            "WHERE category.id = course.type AND teacher.id = course.teacher AND course.check_state = 1 AND course.state = 0 AND course.teacher = #{teacher}")
     List<CourseExtend> queryAllPassByTeacher(String teacher);
 
 
@@ -86,9 +103,15 @@ public interface CourseDao {
      * @param name
      * @return
      */
-    @Select("select * from course where state = 0 and name like CONCAT('%','${name}','%' )")
-    List<Course> queryByName(String name);
+    @Select("SELECT course.*, teacher.name AS 'teacherName', category.category_name AS 'typeName' FROM course,teacher,category WHERE category.id = course.type AND teacher.id = course.teacher AND course.state = 0 and course.name like CONCAT('%','${name}','%' )")
+    List<CourseExtend> queryByName(String name);
 
 
-
+    /**
+     * 查找人气课程
+     * @param num
+     * @return
+     */
+    @Select("SELECT course.*, COUNT(student_course.`id`),teacher.name AS 'teacherName', category.category_name AS 'typeName' FROM course,student_course,teacher,category WHERE course.`teacher` = teacher.`id` AND category.`id` = course.`type` AND course.`id` = student_course.`course` AND course.state = '0' GROUP BY course.`id` ORDER BY COUNT(student_course.`id`) DESC LIMIT #{num}")
+    List<CourseExtend> queryMoodsCourse(Integer num);
 }

@@ -53,6 +53,16 @@ public class CourseDTO {
     private String teacher;
 
     /**
+     * 教师名称
+     */
+    private String teacherName;
+
+    /**
+     * 课程类别名称
+     */
+    private String typeName;
+
+    /**
      * 审核状态
      */
     private String checkState;

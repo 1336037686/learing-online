@@ -38,7 +38,7 @@ public class CourseProvider {
             list.add(" teacher = #{teacher}");
         }
         if(StringUtil.isNotEmpty(course.getCheckState())) {
-            list.add(" checkState = #{checkState}");
+            list.add(" check_state = #{checkState}");
         }
         for (int i = 0; i < list.size(); i++) {
             if(list.size() - 1 == i) {

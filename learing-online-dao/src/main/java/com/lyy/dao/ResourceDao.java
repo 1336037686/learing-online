@@ -46,4 +46,11 @@ public interface ResourceDao {
     List<Resource> queryAllByCourseAndSection(Resource resource);
 
 
+    /**
+     * 查找最新资源
+     * @param num
+     * @return
+     */
+    @Select("select * from resource where state = 0 limit #{num}")
+    List<Resource> queryNewest(Integer num);
 }
