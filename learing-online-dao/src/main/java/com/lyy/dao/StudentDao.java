@@ -1,10 +1,8 @@
 package com.lyy.dao;
 
+import com.lyy.dao.help.StudentProvider;
 import com.lyy.pojo.entity.Student;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -52,7 +50,7 @@ public interface StudentDao {
      * @param student
      * @return
      */
-    @Update("update student set name = #{name}, sex = #{sex}, phone = #{phone}, password = #{password}, specialty = #{specialty}, stu_class = #{stuClass}, address = #{address}, email = #{email}, start_time = #{startTime} where id = #{id}")
+    @UpdateProvider(type = StudentProvider.class, method = "update")
     int update(Student student);
 
     /**

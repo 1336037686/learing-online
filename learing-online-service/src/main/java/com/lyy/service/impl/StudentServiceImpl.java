@@ -76,6 +76,18 @@ public class StudentServiceImpl implements StudentService {
     }
 
     /**
+     * 根据ID查找
+     * @param id
+     * @return
+     */
+    @Override
+    public StudentDTO queryById(String id) {
+        Student student = studentDao.queryById(id);
+        StudentDTO studentDTO = converterUtil.copyPropertiesAndReturnNewOne(student, StudentDTO.class);
+        return studentDTO;
+    }
+
+    /**
      * 条件查找
      * @param dto
      * @return

@@ -83,6 +83,7 @@ public class CourseController {
     public CommonResponse<String> doUpdate(@RequestBody CommonRequest<CourseQueryVO> vo) throws AppException {
         try {
             CourseDTO courseDTO = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), CourseDTO.class);
+            courseDTO.setCheckState("0");
             boolean result = courseService.update(courseDTO);
         } catch (BussinessException b) {
             b.printStackTrace();

@@ -43,4 +43,11 @@ public interface StudentService {
      * @return
      */
     StudentDTO queryByName(StudentDTO dto);
+
+    /**
+     * 根据ID查找学生
+     * @param id
+     * @return
+     */
+    StudentDTO queryById(String id);
 }

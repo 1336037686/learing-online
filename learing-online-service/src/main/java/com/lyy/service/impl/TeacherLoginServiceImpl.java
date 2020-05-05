@@ -24,6 +24,12 @@ public class TeacherLoginServiceImpl implements TeacherLoginService {
     @Autowired
     private ConverterUtil converterUtil;
 
+    /**
+     * 登录
+     * @param dto
+     * @return
+     * @throws BussinessException
+     */
     @Override
     public TeacherDTO login(TeacherDTO dto) throws BussinessException {
         try {
@@ -33,7 +39,7 @@ public class TeacherLoginServiceImpl implements TeacherLoginService {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw new BussinessException(ErrorCode.SERVICE_TEACHER_QUERY_FAIL_ERROR, "教师信息查找出错, 登录失败");
+            throw new BussinessException(ErrorCode.SERVICE_STUDENT_QUERY_FAIL_ERROR, "学生信息查找出错, 登录失败");
         }
         return null;
     }
