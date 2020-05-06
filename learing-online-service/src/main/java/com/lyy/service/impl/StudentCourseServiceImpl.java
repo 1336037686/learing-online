@@ -33,12 +33,19 @@ public class StudentCourseServiceImpl implements StudentCourseService {
 
     @Override
     public boolean save(StudentCourseDTO studentCourseDTO) throws BussinessException {
+        studentCourseDTO.setCheckState("0");
+        // 判断学生学号是否存在
         Student student = studentDao.queryByUserName(studentCourseDTO.getStudent());
         if(student == null) {
             throw new BussinessException(ErrorCode.SERVICE_STUDENT_COURSE_SAVE_FAIL_ERROR, "该学生学号不存在");
         }
+        // 判断学生是否已经选过课程
+        StudentCourse studentCourse = studentCourseDao.queryByCourseAndStudent(studentCourseDTO.getCourse(), student.getId());
+        if(studentCourse != null) {
+            throw new BussinessException(ErrorCode.SERVICE_STUDENT_COURSE_SAVE_FAIL_ERROR, "已经参加该课程, 无需重复添加课程");
+        }
         try {
-            StudentCourse studentCourse = converterUtil.copyPropertiesAndReturnNewOne(studentCourseDTO, StudentCourse.class);
+            studentCourse = converterUtil.copyPropertiesAndReturnNewOne(studentCourseDTO, StudentCourse.class);
             studentCourse.setStudent(student.getId());
             int result = studentCourseDao.save(studentCourse);
         } catch (Exception e) {

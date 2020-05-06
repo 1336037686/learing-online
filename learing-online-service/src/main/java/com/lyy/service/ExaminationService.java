@@ -3,6 +3,7 @@ package com.lyy.service;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.ExaminationDTO;
 import com.lyy.pojo.entity.Examination;
+import com.lyy.pojo.entity.StudentExamination;
 import com.lyy.pojo.entity.extend.StudentExaminationExtend;
 
 import java.util.List;
@@ -24,4 +25,8 @@ public interface ExaminationService {
     List<StudentExaminationExtend> queryStudentExaminationByExamId(String examId) throws BussinessException;
 
     Map<String, Object> queryMissStudentExaminationByCourseAndExam(String courseId, String examId) throws BussinessException;
+
+    Map<String, Object> queryStudentExamMapByCourseAndStudent(String courseId, String studentId) throws BussinessException;
+
+    StudentExamination queryStudentExamByExamAndStudent(String examId, String studentId) throws BussinessException;
 }

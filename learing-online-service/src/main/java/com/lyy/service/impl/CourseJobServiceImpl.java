@@ -6,12 +6,14 @@ import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.CourseJobDTO;
 import com.lyy.pojo.entity.CourseJob;
+import com.lyy.pojo.entity.StudentJob;
 import com.lyy.pojo.entity.extend.StudentJobExtend;
 import com.lyy.service.CourseJobService;
 import com.lyy.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +96,47 @@ public class CourseJobServiceImpl implements CourseJobService {
             List<StudentJobExtend> list = studentJobDao.queryMissStudentJobByCourseAndJob(courseId, jobId);
             map.put("miss", list);
             return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_JOB_QUERY_FAIL_ERROR, "作业信息查找失败");
+        }
+    }
+
+    /**
+     * 根据课程以及学生ID查找学生作业信息作业
+     * @param courseId
+     * @param studentId
+     * @return
+     * @throws BussinessException
+     */
+    @Override
+    public Map<String, Object> queryStudentJobMapByStudentId(String courseId, String studentId) throws BussinessException {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            // 查找未完成作业信息
+            List<CourseJob> missList = studentJobDao.queryMissStudentJobByCourseAndStudent(courseId, studentId);
+            // 查找已提交作业信息
+            List<CourseJob> haveList = studentJobDao.queryStudentJobByCourseAndStudent(courseId, studentId);
+            map.put("miss", missList == null ? new ArrayList<>() : missList);
+            map.put("pass", haveList == null ? new ArrayList<>() : haveList);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_JOB_QUERY_FAIL_ERROR, "作业信息查找失败");
+        }
+    }
+
+    /**
+     * 根据作业以及学生ID查找学生作业信息
+     * @param jobId
+     * @param studentId
+     * @return
+     * @throws BussinessException
+     */
+    @Override
+    public StudentJob queryStudentJobByJobAndStudent(String jobId, String studentId) throws BussinessException {
+        try {
+            return studentJobDao.queryStudentJobByJobAndStudent(jobId, studentId);
         } catch (Exception e) {
             e.printStackTrace();
             throw new BussinessException(ErrorCode.SERVICE_JOB_QUERY_FAIL_ERROR, "作业信息查找失败");

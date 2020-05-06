@@ -7,5 +7,10 @@ import com.lyy.pojo.dto.StudentJobDTO;
  * @date 2020-05-01 2:38
  */
 public interface StudentJobService {
+
     boolean update(StudentJobDTO studentJobDTO);
+
+    boolean saveJob(StudentJobDTO studentJobDTO);
+
+    boolean updateJob(StudentJobDTO studentJobDTO);
 }

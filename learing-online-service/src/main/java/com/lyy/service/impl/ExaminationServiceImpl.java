@@ -6,12 +6,14 @@ import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.ExaminationDTO;
 import com.lyy.pojo.entity.Examination;
+import com.lyy.pojo.entity.StudentExamination;
 import com.lyy.pojo.entity.extend.StudentExaminationExtend;
 import com.lyy.service.ExaminationService;
 import com.lyy.utils.ConverterUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +96,47 @@ public class ExaminationServiceImpl implements ExaminationService {
             List<StudentExaminationExtend> list = studentExaminationDao.queryMissStudentExamByCourseAndExam(courseId, examId);
             map.put("miss", list);
             return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_EXAM_QUERY_FAIL_ERROR, "试卷信息查找失败");
+        }
+    }
+
+    /**
+     * 根据课程和学生ID查找学生考试信息
+     * @param courseId
+     * @param studentId
+     * @return
+     * @throws BussinessException
+     */
+    @Override
+    public Map<String, Object> queryStudentExamMapByCourseAndStudent(String courseId, String studentId) throws BussinessException {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            // 查找未完成作业信息
+            List<Examination> missList = studentExaminationDao.queryMissStudentExamByCourseAndStudent(courseId, studentId);
+            // 查找已提交作业信息
+            List<Examination> haveList = studentExaminationDao.queryStudentExamByCourseAndStudent(courseId, studentId);
+            map.put("miss", missList == null ? new ArrayList<>() : missList);
+            map.put("pass", haveList == null ? new ArrayList<>() : haveList);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_EXAM_QUERY_FAIL_ERROR, "试卷信息查找失败");
+        }
+    }
+
+    /**
+     * 根据试卷和学生ID查找试卷信息
+     * @param examId
+     * @param studentId
+     * @return
+     * @throws BussinessException
+     */
+    @Override
+    public StudentExamination queryStudentExamByExamAndStudent(String examId, String studentId) throws BussinessException {
+        try {
+            return studentExaminationDao.queryStudentExamByExamAndStudent(examId, studentId);
         } catch (Exception e) {
             e.printStackTrace();
             throw new BussinessException(ErrorCode.SERVICE_EXAM_QUERY_FAIL_ERROR, "试卷信息查找失败");

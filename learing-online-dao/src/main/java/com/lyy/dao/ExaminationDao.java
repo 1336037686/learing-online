@@ -25,4 +25,6 @@ public interface ExaminationDao {
     @Select("select * from examination where state = 0 and course = #{courseId} order by start_time desc")
     List<Examination> queryAllByCourse(String courseId);
 
+    @Select("select * from examination where state = '0' and id = #{examination}")
+    Examination queryById(String examination);
 }

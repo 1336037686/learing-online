@@ -1,27 +1,28 @@
 package com.lyy.controller;
 
 import com.lyy.authority.annotation.TokenVerify;
-import com.lyy.common.CommonResponse;
 import com.lyy.common.ResponseBody;
-import com.lyy.common.ResponseHead;
-import com.lyy.common.StateCode;
+import com.lyy.common.*;
 import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.AppException;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.log.annotation.ApiILog;
 import com.lyy.pojo.dto.CourseDTO;
+import com.lyy.pojo.dto.StudentCourseDTO;
 import com.lyy.pojo.entity.extend.CourseExtend;
 import com.lyy.pojo.vo.CourseResponseVO;
+import com.lyy.pojo.vo.StudentCourseQueryVO;
 import com.lyy.service.CourseService;
+import com.lyy.service.StudentCourseService;
 import com.lyy.utils.ConverterUtil;
+import com.lyy.utils.SnowFlakeUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,9 @@ public class CourseController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private StudentCourseService studentCourseService;
 
     @Autowired
     private ConverterUtil converterUtil;
@@ -155,6 +159,28 @@ public class CourseController {
         }
     }
 
+    /**
+     * 根据课程ID查找课程目录
+     * @param id
+     * @return
+     */
+    @TokenVerify(required = false)
+    @ApiOperation(value = "根据课程ID查找课程目录信息", notes = "无")
+    @ApiILog
+    @GetMapping("/query/catalog/all/{id}")
+    public CommonResponse<Map> doQueryCatalogAllById(@PathVariable("id") String id) {
+        try {
+            Map<String, Object> map =  courseService.queryCatalogAllById(id);
+            return new CommonResponse<Map>(new ResponseHead(StateCode.SUCCEED_CODE, "目录信息查询成功"), new ResponseBody<>(map));
+        } catch (BussinessException b) {
+            b.printStackTrace();
+            throw new AppException(b.getCode(), b.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ErrorCode.SERVICE_COURSE_QUERY_FAIL_ERROR, "目录信息查询失败");
+        }
+    }
+
     // TODO：根据关键字检索课程
     /**
      * 分页查找管理员公告信息
@@ -180,12 +206,57 @@ public class CourseController {
     }
 
     // TODO: 学生申请加入课程
+    /**
+     * 添加学生选课信息
+     * @param vo
+     * @return
+     */
+    @TokenVerify(required = false)
+    @ApiOperation(value = "添加学生选课信息", notes = "学生选课信息")
+    @ApiILog
+    @PostMapping("/save")
+    public CommonResponse<String> doSave(@RequestBody CommonRequest<StudentCourseQueryVO> vo) {
+        try {
+            StudentCourseDTO studentCourseDTO = converterUtil.copyPropertiesAndReturnNewOne(vo.getBody().getData(), StudentCourseDTO.class);
+            studentCourseDTO.setId(SnowFlakeUtil.generateId() + "");
+            studentCourseDTO.setTime(new Date());
+            studentCourseDTO.setState("0");
+            boolean result = studentCourseService.save(studentCourseDTO);
+        } catch (BussinessException b) {
+            b.printStackTrace();
+            throw new AppException(b.getCode(), b.getMessage());
+        }  catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ErrorCode.SERVICE_STUDENT_COURSE_SAVE_FAIL_ERROR, "学生选课信息保存失败");
+        }
+        return new CommonResponse<String>(new ResponseHead(StateCode.SUCCEED_CODE, "学生选课信息保存成功"), new ResponseBody<String>("学生选课信息保存成功"));
+    }
 
 
-    // TODO: 学生查看课程申请状态
 
+    // TODO: 根据学生ID查找课程
 
-    // TODO： 学生学习课程
+    /**
+     * 根据学生ID查找课程
+     * @param id
+     * @return
+     */
+    @TokenVerify(required = false)
+    @ApiOperation(value = "根据课程ID查找课程目录", notes = "无")
+    @ApiILog
+    @GetMapping("/query/student/{id}")
+    public CommonResponse<Map> doQueryCourseByStudentId(@PathVariable("id") String id) {
+        try {
+            Map<String, Object> map =  courseService.queryCourseByStudentId(id);
+            return new CommonResponse<Map>(new ResponseHead(StateCode.SUCCEED_CODE, "课程信息查询成功"), new ResponseBody<>(map));
+        } catch (BussinessException b) {
+            b.printStackTrace();
+            throw new AppException(b.getCode(), b.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AppException(ErrorCode.SERVICE_COURSE_QUERY_FAIL_ERROR, "课程信息查询失败");
+        }
+    }
 
 
 

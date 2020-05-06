@@ -76,26 +76,40 @@ public interface CourseService {
      * 查找首页推荐课程
      * @return
      */
-    Map<String, Object> queryCategoryAndCourse(Integer num);
+    Map<String, Object> queryCategoryAndCourse(Integer num) throws BussinessException;
 
     /**
      * 查询课程目录信息
      * @param id
      * @return
      */
-    Map<String, Object> queryCatalogById(String id);
+    Map<String, Object> queryCatalogById(String id) throws BussinessException;
 
     /**
      * 查找人气课程
      * @param num
      * @return
      */
-    List<CourseExtend> queryMoodsCourse(Integer num);
+    List<CourseExtend> queryMoodsCourse(Integer num) throws BussinessException;
 
     /**
      * 根据搜索类型查找课程
      * @param type
      * @return
      */
-    List<CourseExtend> queryAllByType(String type);
+    List<CourseExtend> queryAllByType(String type) throws BussinessException;
+
+    /**
+     * 根据学生ID查找课程
+     * @param id
+     * @return
+     */
+    Map<String, Object> queryCourseByStudentId(String id) throws BussinessException;
+
+    /**
+     * 根据课程ID查找课程目录信息
+     * @param id
+     * @return
+     */
+    Map<String, Object> queryCatalogAllById(String id);
 }

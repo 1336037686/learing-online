@@ -1,5 +1,9 @@
 package com.lyy.pojo.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 
 /**
@@ -7,6 +11,9 @@ import java.util.Date;
  * @author LGX_TvT
  * @date 2020-04-29 4:04
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class StudentAttendance {
 
     /**

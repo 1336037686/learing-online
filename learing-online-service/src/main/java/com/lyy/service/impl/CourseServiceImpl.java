@@ -2,18 +2,12 @@ package com.lyy.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.lyy.dao.CategoryDao;
-import com.lyy.dao.CourseDao;
-import com.lyy.dao.SectionDao;
-import com.lyy.dao.VideoDao;
+import com.lyy.dao.*;
 import com.lyy.exception.ErrorCode;
 import com.lyy.exception.base.BussinessException;
 import com.lyy.pojo.dto.CourseDTO;
 import com.lyy.pojo.dto.VideoDTO;
-import com.lyy.pojo.entity.Category;
-import com.lyy.pojo.entity.Course;
-import com.lyy.pojo.entity.Section;
-import com.lyy.pojo.entity.Video;
+import com.lyy.pojo.entity.*;
 import com.lyy.pojo.entity.extend.CourseExtend;
 import com.lyy.service.CourseService;
 import com.lyy.utils.ConverterUtil;
@@ -43,6 +37,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private VideoDao videoDao;
+
+    @Autowired
+    private StudentCourseDao studentCourseDao;
 
     @Autowired
     private ConverterUtil converterUtil;
@@ -233,6 +230,11 @@ public class CourseServiceImpl implements CourseService {
                     params.put("id", section.getId());
                     params.put("list", videoList);
                     map.put(section.getName(), params);
+                } else {
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("id", section.getId());
+                    params.put("list", new ArrayList<>());
+                    map.put(section.getName(), params);
                 }
             }
             return map;
@@ -274,6 +276,70 @@ public class CourseServiceImpl implements CourseService {
         } catch (Exception e) {
             e.printStackTrace();
             throw new BussinessException(ErrorCode.SERVICE_COURSE_QUERY_FAIL_ERROR, "查找课程信息失败");
+        }
+    }
+
+    /**
+     * 根据学生ID查找选课信息
+     * @param id
+     * @return
+     * @throws BussinessException
+     */
+    @Override
+    public Map<String, Object> queryCourseByStudentId(String id) throws BussinessException {
+        try {
+            Map<String, Object> map = new HashMap<>();
+            List<CourseExtend> list = studentCourseDao.queryByStudent(id);
+            List<CourseExtend> pass = new ArrayList<>();
+            List<CourseExtend> check = new ArrayList<>();
+            List<CourseExtend> fail = new ArrayList<>();
+            for (CourseExtend courseExtend : list) {
+                if ("0".equals(courseExtend.getCheckState())) {
+                    check.add(courseExtend);
+                }
+                if ("1".equals(courseExtend.getCheckState())) {
+                    pass.add(courseExtend);
+                }
+                if ("2".equals(courseExtend.getCheckState())) {
+                    fail.add(courseExtend);
+                }
+            }
+            map.put("pass", pass);
+            map.put("check", check);
+            map.put("fail", fail);
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_COURSE_QUERY_FAIL_ERROR, "查找课程信息失败");
+        }
+    }
+
+    @Override
+    public Map<String, Object> queryCatalogAllById(String id) {
+        try {
+            List<Section> sections = sectionDao.queryAllByCourse(id);
+            Map<String,Object> map = new HashMap<>();
+            for (Section section : sections) {
+                VideoDTO videoDTO = new VideoDTO();
+                videoDTO.setCourse(id);
+                videoDTO.setSection(section.getId());
+                List<Video> videos = videoDao.queryAllByCourseAndSection(videoDTO);
+                if (videos.size() > 0) {
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("id", section.getId());
+                    params.put("list", videos);
+                    map.put(section.getName(), params);
+                } else {
+                    Map<String, Object> params = new HashMap<>();
+                    params.put("id", section.getId());
+                    params.put("list", new ArrayList<>());
+                    map.put(section.getName(), params);
+                }
+            }
+            return map;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new BussinessException(ErrorCode.SERVICE_COURSE_QUERY_FAIL_ERROR, "课程目录信息失败");
         }
     }
 }

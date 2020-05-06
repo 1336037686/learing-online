@@ -1,8 +1,10 @@
 package com.lyy.dao;
 
 import com.lyy.dao.help.StudentExaminationProvider;
+import com.lyy.pojo.entity.Examination;
 import com.lyy.pojo.entity.StudentExamination;
 import com.lyy.pojo.entity.extend.StudentExaminationExtend;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -40,4 +42,39 @@ public interface StudentExaminationDao {
      */
     @UpdateProvider(type = StudentExaminationProvider.class, method = "update")
     int update(StudentExamination studentExamination);
+
+    /**
+     * 根据试卷以及学生查找学生考卷信息
+     * @param examination
+     * @param student
+     * @return
+     */
+    @Select("select * from student_examination where state = 0 and examination = #{examination} and student = #{student}")
+    StudentExamination queryStudentExamByExamAndStudent(String examination, String student);
+
+    /**
+     * 添加作业信息
+     * @param s
+     * @return
+     */
+    @Insert("insert into student_examination values(#{id}, #{examination}, #{student}, #{title}, #{content}, #{resource}, #{time}, #{checkState}, #{score}, #{evaluate}, #{state})")
+    int save(StudentExamination s);
+
+    /**
+     * 根据课程以及学生ID查找学生未考试信息
+     * @param courseId
+     * @param studentId
+     * @return
+     */
+    @Select("SELECT examination.* FROM examination WHERE examination.`state` = '0' AND examination.`course` = #{courseId} and examination.`id` NOT IN (select student_examination.`examination` from student_examination where student_examination.`state` = '0' and student_examination.`student` = #{studentId})")
+    List<Examination> queryMissStudentExamByCourseAndStudent(String courseId, String studentId);
+
+    /**
+     * 根据课程以及学生ID查找学生考试信息
+     * @param courseId
+     * @param studentId
+     * @return
+     */
+    @Select("SELECT examination.* FROM student_examination,examination WHERE student_examination.`state` = '0' AND examination.`state` = '0' AND examination.`id` = student_examination.`examination` AND examination.`course` = #{courseId} AND student_examination.`student` = #{studentId}")
+    List<Examination> queryStudentExamByCourseAndStudent(String courseId, String studentId);
 }

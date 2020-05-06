@@ -24,4 +24,7 @@ public interface CourseJobDao {
 
     @Select("select * from course_job where state = 0 and course = #{courseId} order by start_time desc")
     List<CourseJob> queryAllByCourse(String courseId);
+
+    @Select("select * from course_job where state = 0 and id = #{id}")
+    CourseJob queryById(String courseJobId);
 }
