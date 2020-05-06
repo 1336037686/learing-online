@@ -1,7 +1,7 @@
 package com.lyy;
 
 //@SpringBootApplication
-public class LearningOnlinePojoApplication {
+public class LearningOnlineServiceApplication {
 
     public static void main(String[] args) {
 

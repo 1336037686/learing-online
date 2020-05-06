@@ -2,7 +2,6 @@ package com.lyy.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Map;
 
 /**
  * Md5加密工具
@@ -41,13 +40,5 @@ public class Md5Util {
         } catch (NoSuchAlgorithmException e) {
             return null;
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        System.out.println(Md5Util.md5("root"));
-        String token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ0ZW5hbnRfVXNlciIsImV4cCI6MTU4NTkwMTk0NiwidXNlck5hbWUiOiJyb290IiwiaWF0IjoxNTg1ODE1NTQ2LCJ1c2VySWQiOiIxMjMifQ.8wpQL36l4uaNs9FqasJ6sE9_Z-kyVC1IvnNy7sLWhq4";
-        Map<String, Object> objectMap = TokenUtil.verifyToken(token);
-        System.out.println(objectMap);
-
     }
 }

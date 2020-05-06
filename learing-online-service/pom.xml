@@ -8,6 +8,7 @@
         <version>0.0.1-SNAPSHOT</version>
         <relativePath/>
     </parent>
+    <packaging>jar</packaging>
     <groupId>com.lyy</groupId>
     <artifactId>learing-online-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
